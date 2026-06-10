@@ -1,0 +1,152 @@
+/* CheckoutPage.module.css */
+
+.checkout {
+  min-height: 100vh;
+  background: var(--bg-base);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.logo {
+  height: 36px;
+  object-fit: contain;
+}
+
+.shopName {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--txt-primary);
+}
+
+.seguranca {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--txt-secondary);
+}
+
+/* ── Steps ──────────────────────────────────────────────── */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 18px 0;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  opacity: 0.4;
+  transition: opacity 0.2s;
+}
+
+.step.active { opacity: 1; }
+.step.done   { opacity: 0.7; }
+
+.stepNum {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--border-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.step.active .stepNum {
+  background: var(--cor-loja, #00A854);
+  color: #000;
+}
+
+.step.done .stepNum {
+  background: var(--cor-loja, #00A854);
+  color: #000;
+}
+
+.stepLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--txt-primary);
+}
+
+.stepLine {
+  width: 40px;
+  height: 1px;
+  background: var(--border-subtle);
+  transition: background 0.3s;
+}
+
+.stepLine.done {
+  background: var(--cor-loja, #00A854);
+}
+
+/* ── Main grid ──────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 0;
+  max-width: 1060px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 32px 20px;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.formArea {
+  padding-right: 40px;
+}
+
+.resumoArea {
+  position: sticky;
+  top: 24px;
+}
+
+/* ── Loading / Erro ─────────────────────────────────────── */
+.loading,
+.erro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 100vh;
+  color: var(--txt-secondary);
+  font-size: 13px;
+}
+
+.erro { color: #e05252; }
+
+/* ── Responsivo ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header { padding: 14px 16px; }
+  .grid {
+    grid-template-columns: 1fr;
+    padding: 20px 16px;
+  }
+  .formArea { padding-right: 0; }
+  .resumoArea {
+    position: static;
+    order: -1;
+    margin-bottom: 24px;
+  }
+}

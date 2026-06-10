@@ -1,0 +1,222 @@
+/* MetodoPagamento.module.css */
+
+.container { max-width: 520px; }
+
+.titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--txt-primary);
+  margin-bottom: 20px;
+}
+
+/* ── Métodos ─────────────────────────────────────────────── */
+.metodos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.metodo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.metodo input[type="radio"] { display: none; }
+
+.metodo:hover {
+  border-color: rgba(0,168,84,0.3);
+}
+
+.metodo.selecionado {
+  border-color: var(--cor-loja, #00A854);
+  background: rgba(0,168,84,0.06);
+}
+
+.metodoIcon {
+  font-size: 22px;
+  width: 36px;
+  text-align: center;
+}
+
+.metodoInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.metodoInfo strong {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--txt-primary);
+}
+
+.metodoInfo span {
+  font-size: 11px;
+  color: var(--txt-secondary);
+  margin-top: 1px;
+}
+
+.desconto {
+  background: rgba(0,168,84,0.15);
+  color: #00A854;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 20px;
+}
+
+/* ── Total ───────────────────────────────────────────────── */
+.totalFinal {
+  font-size: 13px;
+  color: var(--txt-secondary);
+  margin-bottom: 20px;
+}
+
+.totalFinal strong {
+  color: var(--txt-primary);
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 6px;
+}
+
+/* ── Ações ───────────────────────────────────────────────── */
+.acoes {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.voltarBtn {
+  padding: 12px 18px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
+  color: var(--txt-secondary);
+  font-size: 13px;
+  background: transparent;
+  transition: all 0.15s;
+}
+
+.voltarBtn:hover { color: var(--txt-primary); }
+.voltarBtn:disabled { opacity: 0.5; cursor: default; }
+
+.pagarBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: var(--cor-loja, #00A854);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.pagarBtn:hover:not(:disabled) { filter: brightness(1.1); }
+.pagarBtn:active:not(:disabled) { transform: scale(0.98); }
+.pagarBtn:disabled { opacity: 0.6; cursor: default; }
+
+.ssl {
+  font-size: 11px;
+  color: var(--txt-muted);
+  text-align: center;
+}
+
+/* ── Pix Card ────────────────────────────────────────────── */
+.pixCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(0,168,84,0.2);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.pixHeader {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.pixIcon {
+  font-size: 32px;
+  color: #00A854;
+}
+
+.pixTitulo {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.pixSub {
+  font-size: 11.5px;
+  color: var(--txt-secondary);
+}
+
+.qrWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.qrCode {
+  width: 180px;
+  height: 180px;
+  border-radius: var(--radius-md);
+  background: #fff;
+  padding: 8px;
+}
+
+.pixCodigo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+
+.codigoTexto {
+  flex: 1;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--txt-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.copiarBtn {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  background: var(--cor-loja, #00A854);
+  color: #000;
+  font-size: 11.5px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: filter 0.15s;
+}
+
+.copiarBtn:hover { filter: brightness(1.1); }
+.copiarBtn.copiado { background: #22c55e; }
+
+.pixInfo {
+  font-size: 11.5px;
+  color: var(--txt-secondary);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.pixInfo strong { color: var(--txt-primary); }
