@@ -1,0 +1,58 @@
+/* painel/css/variables.css
+   Tokens de design — Paleta Verde Shopify */
+
+:root {
+  /* ── Cores principais ─────────────────────────────────── */
+  --verde:          #00A854;
+  --verde-bright:   #00C963;
+  --verde-dark:     #007A3D;
+  --verde-muted:    #009649;
+  --verde-glow:     rgba(0, 168, 84, 0.15);
+  --verde-border:   rgba(0, 168, 84, 0.25);
+  --verde-bg:       rgba(0, 168, 84, 0.07);
+
+  /* ── Fundos ───────────────────────────────────────────── */
+  --bg-base:        #000000;
+  --bg-surface:     #050505;
+  --bg-card:        #0d0d0d;
+  --bg-card-hover:  #141414;
+  --bg-input:       #111111;
+  --bg-sidebar:     #030303;
+
+  /* ── Texto ────────────────────────────────────────────── */
+  --txt-primary:    #FFFFFF;
+  --txt-secondary:  #787878;
+  --txt-muted:      #383838;
+  --txt-verde:      #00A854;
+
+  /* ── Bordas ───────────────────────────────────────────── */
+  --border-subtle:  rgba(255,255,255,0.05);
+  --border-mid:     rgba(255,255,255,0.09);
+
+  /* ── Accent colors ────────────────────────────────────── */
+  --accent-red:     #E05252;
+  --accent-blue:    #3B82F6;
+  --accent-amber:   #F59E0B;
+
+  /* ── Tipografia ───────────────────────────────────────── */
+  --font-ui:        -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  --font-mono:      'SF Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* ── Espaçamentos / raios ─────────────────────────────── */
+  --radius-xs:  4px;
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  14px;
+  --radius-xl:  20px;
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --sidebar-w:  240px;
+  --header-h:   52px;
+
+  /* ── Sombras ──────────────────────────────────────────── */
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.8), 0 0 0 1px var(--border-subtle);
+  --shadow-verde: 0 0 24px rgba(0,168,84,0.12);
+
+  /* ── Transições ───────────────────────────────────────── */
+  --transition: 0.15s ease;
+}
