@@ -1,81 +1,62 @@
 /**
- * checkout-node/src/hooks/useSession.js
+ * src/hooks/useSession.js
  *
- * Hook React que busca os dados da sessão de checkout no backend PHP.
- * Gerencia: loading, erro, dados da sessão, config da loja e pixels.
+ * Hook que busca os dados da sessão de checkout pelo sessionId da URL.
+ * Retorna: { sessao, carregando, erro }
  *
- * Ao carregar com sucesso, injeta os pixels de Facebook e TikTok
- * e dispara o evento InitiateCheckout via browser.
+ * Estrutura esperada de sessao:
+ *   { loja, carrinho, total, pixels }
  */
-
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { injetarPixelFacebook, dispararEventoFB } from '../tracking/facebook';
-import { injetarPixelTikTok, dispararEventoTT }   from '../tracking/tiktok';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://api.seudominio.com';
 
 export function useSession() {
   const { sessionId } = useParams();
+  const navigate      = useNavigate();
 
-  const [sessao,   setSessao]   = useState(null);
+  const [sessao,     setSessao]     = useState(null);
   const [carregando, setCarregando] = useState(true);
-  const [erro,     setErro]     = useState(null);
+  const [erro,       setErro]       = useState(null);
 
   useEffect(() => {
     if (!sessionId) {
-      setErro('Session ID ausente na URL.');
-      setCarregando(false);
+      navigate('/erro', { replace: true });
       return;
     }
 
-    const controller = new AbortController();
+    let cancelado = false;
 
-    async function carregarSessao() {
+    async function buscarSessao() {
       try {
         const resposta = await fetch(
           `${API_URL}/api/get_session.php?session_id=${encodeURIComponent(sessionId)}`,
-          { signal: controller.signal, credentials: 'omit' }
+          { credentials: 'omit' }
         );
+
+        if (!resposta.ok) {
+          throw new Error('Sessão inválida ou expirada.');
+        }
 
         const dados = await resposta.json();
 
-        if (!resposta.ok) {
-          throw new Error(dados.erro || `Erro HTTP ${resposta.status}`);
+        if (!dados.sucesso || !dados.sessao) {
+          throw new Error(dados.erro || 'Sessão não encontrada.');
         }
 
-        setSessao(dados);
-
-        // ── Injetar pixels e disparar InitiateCheckout ──────────
-        if (dados.pixels?.facebook) {
-          injetarPixelFacebook(dados.pixels.facebook);
-          dispararEventoFB('InitiateCheckout', {
-            value:    dados.total,
-            currency: dados.loja?.moeda || 'BRL',
-          });
-        }
-
-        if (dados.pixels?.tiktok) {
-          injetarPixelTikTok(dados.pixels.tiktok);
-          dispararEventoTT('InitiateCheckout', {
-            value:    dados.total,
-            currency: dados.loja?.moeda || 'BRL',
-          });
-        }
-
+        if (!cancelado) setSessao(dados.sessao);
       } catch (err) {
-        if (err.name !== 'AbortError') {
-          setErro(err.message || 'Erro ao carregar sessão.');
-        }
+        if (!cancelado) setErro(err.message || 'Erro ao carregar checkout.');
       } finally {
-        setCarregando(false);
+        if (!cancelado) setCarregando(false);
       }
     }
 
-    carregarSessao();
+    buscarSessao();
 
-    return () => controller.abort();
-  }, [sessionId]);
+    return () => { cancelado = true; };
+  }, [sessionId, navigate]);
 
-  return { sessao, carregando, erro, sessionId };
+  return { sessao, carregando, erro };
 }

@@ -1,0 +1,199 @@
+/* ResumoPedido.module.css */
+
+.card {
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* ── Header (toggle em mobile) ───────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  text-align: left;
+}
+
+.headerLabel {
+  flex: 1;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.headerTotal {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--cor-loja, #00a854);
+}
+
+.chevron {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s;
+  display: none; /* visível só em mobile */
+}
+
+.chevron.up {
+  transform: rotate(180deg);
+}
+
+/* ── Corpo ───────────────────────────────────────────────── */
+.corpo {
+  padding: 16px 18px;
+}
+
+/* ── Itens ───────────────────────────────────────────────── */
+.itens {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.itemImg {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.itemImg img {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.imgPlaceholder {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  background: #1e1e1e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.qtd {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  font-size: 10px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.itemInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.itemNome {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.itemVariante {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.itemPreco {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+/* ── Totais ──────────────────────────────────────────────── */
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 14px 0;
+}
+
+.totais {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.linhaTotal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.gratis {
+  color: var(--cor-loja, #00a854);
+  font-weight: 600;
+}
+
+.linhaTotalFinal {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Responsivo ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .header {
+    cursor: pointer;
+  }
+
+  .chevron {
+    display: inline;
+  }
+
+  .corpo {
+    display: none;
+  }
+
+  .corpo.aberto {
+    display: block;
+  }
+}
+
+@media (min-width: 769px) {
+  .header {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .chevron {
+    display: none;
+  }
+
+  .corpo {
+    display: block !important;
+  }
+}

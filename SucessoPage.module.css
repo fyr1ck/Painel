@@ -1,0 +1,110 @@
+/* SucessoPage.module.css */
+
+.page {
+  min-height: 100vh;
+  background: #0d0d0d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+  background: #111;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+}
+
+.iconWrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.checkIcon {
+  width: 64px;
+  height: 64px;
+  color: var(--cor-loja, #00a854);
+}
+
+.titulo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.sub {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 28px;
+}
+
+/* ── Info do pedido ──────────────────────────────────────── */
+.infoPedido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.infoPedido:first-of-type {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.infoLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.infoValor {
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.emailMsg {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 16px;
+}
+
+.emailMsg strong {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ── Próximos passos ─────────────────────────────────────── */
+.prox {
+  margin-top: 28px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 16px 18px;
+  text-align: left;
+}
+
+.prox p {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prox ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prox li {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+}

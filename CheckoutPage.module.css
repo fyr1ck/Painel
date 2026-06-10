@@ -1,32 +1,51 @@
 /* CheckoutPage.module.css */
 
+/* ── Wrapper principal ───────────────────────────────────── */
 .checkout {
   min-height: 100vh;
-  background: var(--bg-base);
-  display: flex;
-  flex-direction: column;
+  background: #0d0d0d;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 }
 
-/* ── Header ─────────────────────────────────────────────── */
+/* ── Loading / Erro ──────────────────────────────────────── */
+.loading,
+.erro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+}
+
+.erro p {
+  color: #e05252;
+  font-size: 15px;
+}
+
+/* ── Header ──────────────────────────────────────────────── */
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 32px;
-  border-bottom: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
+  padding: 16px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0a0a0a;
 }
 
 .logo {
-  height: 36px;
+  height: 32px;
   object-fit: contain;
 }
 
 .shopName {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--txt-primary);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #fff;
 }
 
 .seguranca {
@@ -34,82 +53,86 @@
   align-items: center;
   gap: 6px;
   font-size: 11px;
-  color: var(--txt-secondary);
+  color: rgba(255, 255, 255, 0.4);
 }
 
-/* ── Steps ──────────────────────────────────────────────── */
+/* ── Steps ───────────────────────────────────────────────── */
 .steps {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0;
-  padding: 18px 0;
-  background: var(--bg-surface);
-  border-bottom: 1px solid var(--border-subtle);
+  padding: 20px 24px;
+  background: #0a0a0a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .step {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 0 8px;
-  opacity: 0.4;
-  transition: opacity 0.2s;
+  color: rgba(255, 255, 255, 0.3);
+  transition: color 0.2s;
 }
 
-.step.active { opacity: 1; }
-.step.done   { opacity: 0.7; }
+.step.active {
+  color: var(--cor-loja, #00a854);
+}
+
+.step.done {
+  color: rgba(255, 255, 255, 0.5);
+}
 
 .stepNum {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--border-mid);
+  border: 1.5px solid currentColor;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
+  flex-shrink: 0;
 }
 
 .step.active .stepNum {
-  background: var(--cor-loja, #00A854);
-  color: #000;
+  background: var(--cor-loja, #00a854);
+  border-color: var(--cor-loja, #00a854);
+  color: #fff;
 }
 
 .step.done .stepNum {
-  background: var(--cor-loja, #00A854);
-  color: #000;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .stepLabel {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--txt-primary);
+  font-weight: 500;
 }
 
 .stepLine {
   width: 40px;
   height: 1px;
-  background: var(--border-subtle);
-  transition: background 0.3s;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 0 8px;
+  transition: background 0.2s;
 }
 
 .stepLine.done {
-  background: var(--cor-loja, #00A854);
+  background: rgba(255, 255, 255, 0.3);
 }
 
-/* ── Main grid ──────────────────────────────────────────── */
+/* ── Grid principal ──────────────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: 1fr 380px;
   gap: 0;
-  max-width: 1060px;
+  max-width: 1100px;
   margin: 0 auto;
-  width: 100%;
-  padding: 32px 20px;
-  flex: 1;
-  align-items: flex-start;
+  padding: 32px 24px;
+  align-items: start;
 }
 
 .formArea {
@@ -121,32 +144,28 @@
   top: 24px;
 }
 
-/* ── Loading / Erro ─────────────────────────────────────── */
-.loading,
-.erro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  min-height: 100vh;
-  color: var(--txt-secondary);
-  font-size: 13px;
-}
-
-.erro { color: #e05252; }
-
-/* ── Responsivo ─────────────────────────────────────────── */
+/* ── Responsivo ──────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .header { padding: 14px 16px; }
   .grid {
     grid-template-columns: 1fr;
     padding: 20px 16px;
   }
-  .formArea { padding-right: 0; }
+
+  .formArea {
+    padding-right: 0;
+  }
+
   .resumoArea {
     position: static;
     order: -1;
     margin-bottom: 24px;
+  }
+
+  .steps {
+    padding: 16px;
+  }
+
+  .stepLabel {
+    display: none;
   }
 }
