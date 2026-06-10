@@ -1,0 +1,56 @@
+/* ============================================================
+   admin/src/styles/globals/variables.css
+   Design tokens do Admin Panel — Dark Gold Theme
+   Extraído do bloco <style> inline do index.html original
+   ============================================================ */
+
+:root {
+  /* Fundos */
+  --bg-base:       #000000;
+  --bg-surface:    #0a0a0a;
+  --bg-elevated:   #111111;
+  --bg-card:       #111111;
+  --bg-hover:      rgba(255, 255, 255, 0.03);
+  --bg-active:     rgba(255, 255, 255, 0.05);
+
+  /* Texto */
+  --text-primary:   #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.55);
+  --text-muted:     rgba(255, 255, 255, 0.30);
+  --text-disabled:  rgba(255, 255, 255, 0.18);
+
+  /* Bordas */
+  --border-subtle:  rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.10);
+  --border-strong:  rgba(255, 255, 255, 0.18);
+
+  /* Gold — accent principal */
+  --gold-base:      #D4AF37;
+  --gold-light:     #E8C84A;
+  --gold-dark:      #B8952A;
+  --gold-muted:     rgba(212, 175, 55, 0.15);
+  --gold-glow:      rgba(212, 175, 55, 0.08);
+
+  /* Status */
+  --accent-green:   #22c55e;
+  --accent-red:     #ef4444;
+  --accent-yellow:  #f59e0b;
+  --accent-blue:    #3b82f6;
+  --accent-purple:  #a855f7;
+
+  /* Layout */
+  --sidebar-width:    220px;
+  --topbar-height:    56px;
+  --radius-sm:        6px;
+  --radius-md:        10px;
+  --radius-lg:        14px;
+  --radius-xl:        18px;
+
+  /* Sombras */
+  --shadow-card:    0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 8px rgba(0, 0, 0, 0.2);
+  --shadow-gold:    0 0 20px rgba(212, 175, 55, 0.12);
+
+  /* Transições */
+  --transition-fast:   0.12s ease;
+  --transition-normal: 0.2s ease;
+}
