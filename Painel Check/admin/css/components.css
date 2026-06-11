@@ -1,0 +1,440 @@
+/* ===========================================================================
+   components.css — Componentes específicos de telas (gateways, lojas, domínios,
+   live view, métricas, pixels, fretes, empty states, etc.)
+   =========================================================================== */
+
+/* GATEWAY CARD */
+.gateway-card {
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.gateway-card:hover {
+  border-color: var(--gold-border);
+}
+.gateway-card.selected {
+  border-color: var(--gold-base);
+  background: rgba(0, 164, 124, 0.04);
+}
+.gateway-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+/* DOMAIN ROW */
+.domain-row {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.domain-row .domain-name {
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+}
+.domain-row .domain-meta {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+/* STORE CARD */
+.store-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  transition: border-color 0.15s;
+}
+.store-card:hover {
+  border-color: var(--gold-border);
+}
+.store-card-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: var(--bg-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.store-card-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.store-card-id {
+  font-size: 10px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  margin-bottom: 10px;
+}
+.store-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.store-tag {
+  padding: 2px 8px;
+  border-radius: 20px;
+  font-size: 9.5px;
+  font-weight: 600;
+}
+.store-tag.shopify {
+  background: rgba(16, 217, 160, 0.1);
+  color: var(--accent-green);
+}
+.store-tag.whop {
+  background: rgba(0, 164, 124, 0.12);
+  color: var(--gold-base);
+}
+.store-tag.ads {
+  background: rgba(56, 95, 147, 0.15);
+  color: #6b9fd4;
+}
+.store-tag.brl {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-secondary);
+}
+.store-card-actions {
+  display: flex;
+  gap: 6px;
+}
+.store-card-actions button {
+  flex: 1;
+  padding: 6px;
+  font-size: 10.5px;
+}
+
+/* LIVE VIEW */
+.liveview-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr 220px;
+  gap: 0;
+  height: 100%;
+}
+.liveview-left {
+  padding: 18px;
+  border-right: 1px solid var(--border-subtle);
+  overflow-y: auto;
+}
+.liveview-center {
+  position: relative;
+  background: #010510;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.liveview-right {
+  padding: 18px;
+  border-left: 1px solid var(--border-subtle);
+  overflow-y: auto;
+}
+.globe-wrap {
+  position: relative;
+  width: 480px;
+  height: 480px;
+}
+.globe-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* METRIC ROW */
+.metric-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.metric-row:last-child {
+  border-bottom: none;
+}
+.metric-name {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.metric-val {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.metric-group {
+  margin-bottom: 18px;
+}
+.metric-group-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+.metric-big {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+/* COPY BOX */
+.copy-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-primary);
+}
+.copy-btn {
+  color: var(--text-muted);
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.copy-btn:hover {
+  color: var(--gold-base);
+}
+
+/* INFO BOX */
+.info-box {
+  background: rgba(0, 164, 124, 0.04);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.info-box p {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.info-box strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* PIXEL CONFIG */
+.pixel-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+.pixel-section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+/* ADS CHART */
+.ads-chart-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  margin-bottom: 16px;
+}
+
+/* FRETE */
+.frete-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+.frete-item .frete-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  flex-shrink: 0;
+}
+.frete-item .frete-name {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+}
+.frete-item .frete-price {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+}
+.empty-state svg {
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.empty-state h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.empty-state p {
+  font-size: 12px;
+  color: var(--text-secondary);
+  max-width: 320px;
+  margin: 0 auto 18px;
+}
+
+/* ===========================================================================
+   Adições — telas Live View, Integrações, Produtos, Lojas
+   =========================================================================== */
+
+/* GLOBO estilizado (Live View) — versão leve em CSS, sem Three.js */
+.globe {
+  width: 440px;
+  max-width: 70vmin;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(circle at 35% 30%, #0b1b2e 0%, #04101d 55%, #02080f 100%);
+  box-shadow: 0 0 80px rgba(0, 110, 200, 0.25),
+    inset -20px -20px 60px rgba(0, 0, 0, 0.7),
+    inset 14px 14px 40px rgba(40, 120, 200, 0.15);
+  overflow: hidden;
+}
+.globe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background-image: radial-gradient(rgba(56, 130, 220, 0.55) 1px, transparent 1.4px);
+  background-size: 14px 14px;
+  -webkit-mask: radial-gradient(circle at 50% 50%, #000 60%, transparent 72%);
+  mask: radial-gradient(circle at 50% 50%, #000 60%, transparent 72%);
+  animation: globespin 26s linear infinite;
+}
+.globe::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(120deg, transparent 40%, rgba(0, 0, 0, 0.55) 100%);
+}
+@keyframes globespin {
+  from { background-position: 0 0; }
+  to { background-position: 220px 0; }
+}
+.globe-hint {
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Badge "CONFIGURADO"/"PENDENTE" no gateway */
+.gw-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.gw-badge.ok { background: rgba(0, 164, 124, 0.14); color: var(--gold-base); }
+.gw-badge.pend { background: var(--amber-bg); color: var(--amber); }
+.gateway-card .gw-radio {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--border-mid);
+  flex-shrink: 0;
+}
+.gateway-card.selected .gw-radio {
+  border-color: var(--gold-base);
+  background: radial-gradient(circle, var(--gold-base) 40%, transparent 46%);
+}
+
+/* Linha de produto (tela Produtos) */
+.prod-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 10px;
+}
+.prod-row .prod-thumb {
+  width: 44px; height: 44px; border-radius: 8px;
+  background: var(--bg-input); object-fit: cover; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.prod-row .prod-info { flex: 1; min-width: 0; }
+.prod-row .prod-nome { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.prod-row .prod-meta { font-size: 11px; color: var(--text-secondary); margin-top: 2px; }
+.prod-row .prod-link {
+  font-family: var(--font-mono); font-size: 11px; color: var(--gold-base);
+}
+
+/* Item de menu "Ver Checkout" (link externo) usa o mesmo estilo de nav-item */
+.nav-item.external svg { opacity: 0.8; }
+
+/* Botão pequeno de ícone (editar/config/excluir nos cards de loja) */
+.icon-btn {
+  width: 30px; height: 30px; border-radius: 8px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--border-mid); background: var(--bg-card);
+  color: var(--text-secondary);
+}
+.icon-btn:hover { border-color: var(--gold-border); color: var(--gold-base); }
+.icon-btn.danger:hover { border-color: rgba(224,82,82,0.4); color: var(--accent-red); }
+
+/* Quando o globo 3D (Three.js) monta, remove a esfera de CSS para não duplicar */
+.globe.three-on { background: none; box-shadow: 0 0 90px rgba(0, 110, 200, 0.22); }
+.globe.three-on::before, .globe.three-on::after { content: none; }
+.globe.three-on .globe-hint { z-index: 2; }

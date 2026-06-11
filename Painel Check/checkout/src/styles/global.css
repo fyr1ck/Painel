@@ -1,0 +1,95 @@
+/* ===========================================================================
+   global.css — Estilos globais do Checkout
+   ---------------------------------------------------------------------------
+   NOTA: o global.css original (na raiz) não pôde ser baixado do GitHub pelas
+   ferramentas disponíveis. Esta versão foi reconstruída de forma fiel ao uso
+   real das classes nos componentes (.spinner e .fade-up são usados via
+   className global em CheckoutPage e MetodoPagamento).
+   --------------------------------------------------------------------------- */
+
+/* Tokens base (a cor de destaque é sobrescrita por loja via --cor-loja inline) */
+:root {
+  --cor-loja: #00a854;
+  --co-bg: #f4f5f7;
+  --co-card: #ffffff;
+  --co-text: #1a1f2b;
+  --co-muted: #6b7280;
+  --co-border: #e6e8ec;
+  --co-radius: 12px;
+  --co-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 6px 24px rgba(16, 24, 40, 0.06);
+  --co-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui,
+    sans-serif;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+body {
+  background: var(--co-bg);
+  color: var(--co-text);
+  font-family: var(--co-font);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Spinner (usado por className="spinner") */
+.spinner {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(0, 0, 0, 0.12);
+  border-top-color: var(--cor-loja);
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+  vertical-align: middle;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animação de entrada (usado por className="fade-up") */
+.fade-up {
+  animation: fadeUp 0.35s ease both;
+}
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rone · Painel Admin</title>
+  <link rel="stylesheet" href="css/globals.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/cards.css" />
+  <link rel="stylesheet" href="css/tables.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- ============================ SIDEBAR ============================ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark">r</div>
+        <div><div class="logo-text">rone</div><div class="logo-badge">ADMIN</div></div>
+      </div>
+
+      <div class="store-selector" data-view="lojas">
+        <div><div class="store-name" id="storeSelectorName">PRÜNE</div></div>
+        <div class="store-chevron">▼</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Principal</div>
+        <div class="nav-item active" data-view="dashboard"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>Dashboard</div>
+        <div class="nav-item" data-view="liveview"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="8" cy="8" r="2.5"/></svg>Live View <span class="badge">LIVE</span></div>
+        <div class="nav-item" data-view="pedidos"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 2h10a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V3a1 1 0 011-1zm2 3h6M5 8h6M5 11h4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Pedidos</div>
+        <div class="nav-item" data-view="carrinhos"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 1h2.5l2 8h7l1.5-5.5H4.5" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="7" cy="13" r="1"/><circle cx="12" cy="13" r="1"/></svg>Carrinhos</div>
+        <div class="nav-item" data-view="ads"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 11L6 5l3 4 2-2.5L14 11H2z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Ads</div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Loja</div>
+        <div class="nav-item" data-view="configuracoes"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2" stroke="currentColor" stroke-width="1.2"/></svg>Configurações</div>
+        <div class="nav-item" data-view="fretes"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M1 9V4h10v5H1zM11 6h2l2 2v1h-4V6z" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="3.5" cy="11.5" r="1.5"/><circle cx="12.5" cy="11.5" r="1.5"/></svg>Fretes</div>
+        <div class="nav-item" data-view="integracoes"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="12" cy="4" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/><circle cx="8" cy="12" r="2" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Integrações</div>
+        <div class="nav-item" data-view="produtos"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Produtos</div>
+        <div class="nav-item" data-view="pixels"><svg viewBox="0 0 16 16" fill="currentColor"><rect x="2" y="2" width="5" height="5" rx="0.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="9" y="2" width="5" height="5" rx="0.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="2" y="9" width="5" height="5" rx="0.5" stroke="currentColor" stroke-width="1.2" fill="none"/><rect x="9" y="9" width="5" height="5" rx="0.5" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Pixels</div>
+        <div class="nav-item" data-view="lojas"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 7l6-5 6 5v7H2V7z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Lojas</div>
+        <div class="nav-item" data-view="dominios"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M2 8h12M8 2c-2 2-2 8 0 12M8 2c2 2 2 8 0 12" stroke="currentColor" stroke-width="1.2"/></svg>Domínios</div>
+        <a class="nav-item external" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M6 3H3v10h10v-3M10 3h3v3M13 3L7 9" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Ver Checkout</a>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-section-label">Conta</div>
+        <div class="nav-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zM2 14a6 6 0 0112 0" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Sair</div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="user-card">
+          <div class="user-avatar">C</div>
+          <div class="user-info"><div class="user-name">compras onlines</div><div class="user-email">comprasonlinesdominios2…</div></div>
+          <div class="online-dot"></div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ============================= MAIN ============================= -->
+    <div class="main">
+      <div class="topbar">
+        <button class="topbar-btn" id="menuToggle" aria-label="Menu" style="display:none;"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/></svg></button>
+        <div class="topbar-breadcrumb">
+          <span class="breadcrumb-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></span>
+          <span class="breadcrumb-title" id="pageTitle">DASHBOARD</span>
+        </div>
+        <div class="topbar-actions">
+          <span class="topbar-count" id="topbarStore">loja11</span>
+          <button class="topbar-btn primary" data-view="lojas"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5"/></svg></button>
+          <button class="topbar-btn"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3" fill="none"/><path d="M2 8h12M8 2c-2 2-2 8 0 12M8 2c2 2 2 8 0 12" stroke="currentColor" stroke-width="1.1"/></svg></button>
+        </div>
+      </div>
+
+      <!-- ============================ DASHBOARD ============================ -->
+      <div class="view active" id="view-dashboard"><div class="page">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div>
+            <div style="font-size:10px;color:var(--gold-base);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;"><span class="live-dot"></span> LIVE DATA</div>
+            <h1 style="font-size:24px;font-weight:800;color:var(--text-primary);letter-spacing:-0.5px;">PRÜNE</h1>
+            <div style="font-size:11px;color:var(--text-secondary);">Últimos 30 dias</div>
+          </div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            <button class="tab active">Hoje</button><button class="tab">7d</button><button class="tab">30d</button><button class="tab">Mês</button><button class="tab">Máx</button>
+            <button class="btn btn-gold" data-view="liveview"><span class="live-dot"></span> Live View</button>
+          </div>
+        </div>
+        <div class="cards-grid cols-4" style="margin-bottom:14px;">
+          <div class="card"><div class="card-header"><div><div class="card-label">Faturamento</div><div class="card-value">$ 0,00</div><div class="card-sub">receita confirmada</div></div><div class="card-icon green">$</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Gasto em Ads</div><div class="card-value">$ 0,00</div><div class="card-sub">investido em anúncios</div></div><div class="card-icon red">▣</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Lucro</div><div class="card-value">$ 0,00</div><div class="card-sub">faturamento − ads</div></div><div class="card-icon green">↑</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">ROAS</div><div class="card-value">—</div><div class="card-sub">retorno sobre ads</div></div><div class="card-icon blue">∿</div></div></div>
+        </div>
+        <div class="cards-grid cols-3" style="margin-bottom:14px;">
+          <div class="card"><div class="card-label">Vendas</div><div class="card-value">0</div><div class="card-sub">pedidos pagos</div></div>
+          <div class="card"><div class="card-label">Visitas</div><div class="card-value">111</div><div class="card-sub">acessos ao checkout</div></div>
+          <div class="card"><div class="card-label">Conversão</div><div class="card-value">0%</div><div class="card-sub">visitas → vendas</div></div>
+        </div>
+        <div class="cards-grid cols-2" style="margin-bottom:14px;">
+          <div class="chart-card">
+            <div class="chart-header"><div><div class="card-label">Volume de Vendas</div><div class="chart-big-value">$ 0,00</div><div class="chart-sub">Últimos 30 dias</div></div><span class="badge success" style="margin-left:auto;">↗ Vendas</span></div>
+            <svg class="chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none">
+              <line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.04)"/>
+              <path d="M0 60 L400 60" fill="none" stroke="#00c896" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="chart-card">
+            <div class="chart-header"><div><div class="card-label">Funil de Vendas</div><div class="chart-big-value">111 Visitas</div></div><span class="badge pending" style="margin-left:auto;">0% fecharam</span></div>
+            <div style="margin-top:12px;">
+              <div class="funnel-bar"><div class="funnel-label">Dados Pessoais</div><div class="funnel-track"><div class="funnel-fill" style="width:100%;background:var(--accent-green);"></div></div><div class="funnel-count">40</div><div class="funnel-pct">36%</div></div>
+              <div class="funnel-bar"><div class="funnel-label">Entrega</div><div class="funnel-track"><div class="funnel-fill" style="width:36%;background:var(--accent-blue);"></div></div><div class="funnel-count">14</div><div class="funnel-pct" style="color:var(--accent-red);">-65%</div></div>
+              <div class="funnel-bar"><div class="funnel-label">Pagamento</div><div class="funnel-track"><div class="funnel-fill" style="width:6%;background:var(--amber);"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
+              <div class="funnel-bar"><div class="funnel-label">Comprou</div><div class="funnel-track"><div class="funnel-fill" style="width:3%;background:var(--accent-green);"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <div class="table-header"><div class="table-title">Pedidos Recentes</div><button class="btn btn-outline" style="font-size:10.5px;" data-view="pedidos">Ver todos →</button></div>
+          <table><thead><tr><th>#</th><th>Cliente</th><th>Método</th><th>Valor</th><th>Status</th><th>Data</th></tr></thead>
+            <tbody id="dashPedidos"></tbody></table>
+        </div>
+      </div></div>
+
+      <!-- ============================ LIVE VIEW ============================ -->
+      <div class="view flex-view" id="view-liveview">
+        <div class="liveview-layout">
+          <div class="liveview-left">
+            <div style="margin-bottom:14px;"><span class="badge success dot">AGORA MESMO</span></div>
+            <h2 style="font-size:20px;font-weight:800;margin-bottom:2px;">LIVE VIEW</h2>
+            <p style="font-size:11px;color:var(--text-secondary);margin-bottom:16px;">Atividade em tempo real — hoje</p>
+            <div class="metric-group-title">Métricas de hoje</div>
+            <div class="cards-grid cols-2" style="margin-bottom:16px;">
+              <div class="card"><div class="card-label">Visitas</div><div class="card-value">—</div><div class="card-sub">checkouts abertos</div></div>
+              <div class="card"><div class="card-label">Vendas</div><div class="card-value">—</div><div class="card-sub">confirmadas</div></div>
+              <div class="card"><div class="card-label">Faturamento</div><div class="card-value">—</div><div class="card-sub">aprovadas</div></div>
+              <div class="card"><div class="card-label">Abandonos</div><div class="card-value">—</div><div class="card-sub">sem conversão</div></div>
+            </div>
+            <div class="metric-group-title">Funil — hoje</div>
+            <div class="cards-grid cols-2">
+              <div class="card" style="text-align:center;"><div class="card-value">0</div><div class="card-sub">Email</div></div>
+              <div class="card" style="text-align:center;"><div class="card-value">0</div><div class="card-sub">Endereço</div></div>
+              <div class="card" style="text-align:center;"><div class="card-value">0</div><div class="card-sub">Pagamento</div></div>
+              <div class="card" style="text-align:center;"><div class="card-value">0</div><div class="card-sub">Comprou</div></div>
+            </div>
+          </div>
+          <div class="liveview-center">
+            <div class="globe" id="globeBox"><div class="globe-hint">— Arraste para rotacionar · Scroll para zoom —</div></div>
+          </div>
+          <div class="liveview-right">
+            <div class="metric-group-title">Top Cidades</div>
+            <div class="empty-state" style="padding:20px 0;"><p>Aguardando dados…</p></div>
+            <div class="metric-group-title">Vendas Recentes</div>
+            <div class="empty-state" style="padding:20px 0;"><p>Nenhuma venda hoje ainda</p></div>
+            <div class="metric-group-title">Arcos Ativos</div>
+            <div class="metric-big" id="arcosCount">0</div>
+            <div class="card-sub">transações voando pelo globo</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================ PEDIDOS ============================ -->
+      <div class="view" id="view-pedidos"><div class="page">
+        <div class="sub-header">
+          <div><h1 style="font-size:18px;font-weight:700;">Todos os Pedidos</h1><p style="font-size:12px;color:var(--text-secondary);"><span id="pedidosCount">0</span> pedido(s) encontrado(s)</p></div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <select class="form-control" id="pedFiltroStatus" style="width:auto;"><option value="">Todos status</option><option value="pending">Pendente</option><option value="paid">Pago</option><option value="failed">Falhou</option></select>
+            <div class="search-wrap"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4" fill="none"/><path d="M11 11l3 3" stroke="currentColor" stroke-width="1.4"/></svg><input id="pedBusca" placeholder="Buscar por nome, email ou ID…"/></div>
+            <button class="btn btn-gold" id="pedBuscar">Buscar</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>#ID</th><th>Cliente</th><th>Items</th><th>Método</th><th>Valor</th><th>Status</th><th>Data</th><th></th></tr></thead>
+            <tbody id="pedidosBody"></tbody></table>
+        </div>
+      </div></div>
+
+      <!-- ============================ CARRINHOS ============================ -->
+      <div class="view" id="view-carrinhos"><div class="page">
+        <div class="tabs"><button class="tab">Hoje</button><button class="tab">Ontem</button><button class="tab">Últimos 7 dias</button><button class="tab">Últimos 30 dias</button><button class="tab active">Máximo</button></div>
+        <div class="cards-grid cols-4" style="margin-bottom:16px;">
+          <div class="card"><div class="card-header"><div><div class="card-value" id="cartAbandonados">0</div><div class="card-sub">Abandonados</div></div><div class="card-icon gold">🛒</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-value" id="cartPerdido">$ 0,00</div><div class="card-sub">Valor perdido</div></div><div class="card-icon red">↘</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-value">0,0%</div><div class="card-sub">Taxa de conversão</div></div><div class="card-icon blue">%</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-value">0</div><div class="card-sub">Parou no pagamento</div></div><div class="card-icon gold">▢</div></div></div>
+        </div>
+        <div class="card" style="margin-bottom:16px;">
+          <div class="section-title" style="justify-content:space-between;"><span>Funil de checkout</span><span style="font-size:11px;color:var(--text-secondary);">111 sessões</span></div>
+          <div class="funnel-bar"><div class="funnel-label">👁 Visitou checkout</div><div class="funnel-track"><div class="funnel-fill" style="width:100%;background:#5a5a5a;"></div></div><div class="funnel-count">111</div><div class="funnel-pct">100%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">✉ Informou e-mail</div><div class="funnel-track"><div class="funnel-fill" style="width:36%;background:#4a4a4a;"></div></div><div class="funnel-count">40</div><div class="funnel-pct">36%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">📍 Informou endereço</div><div class="funnel-track"><div class="funnel-fill" style="width:12.6%;background:#3a3a3a;"></div></div><div class="funnel-count">14</div><div class="funnel-pct">12,6%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">▢ Chegou no pagamento</div><div class="funnel-track"><div class="funnel-fill" style="width:2%;background:#2a2a2a;"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">✓ Comprou</div><div class="funnel-track"><div class="funnel-fill" style="width:1%;background:var(--accent-green);"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
+        </div>
+        <div class="sub-header"><div><h2 style="font-size:15px;font-weight:700;">Carrinhos Abandonados</h2><p style="font-size:12px;color:var(--text-secondary);"><span id="cartCount">0</span> carrinho(s)</p></div></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Cliente</th><th>Step</th><th>Valor</th><th>Cidade</th><th>Quando</th><th></th></tr></thead>
+            <tbody id="carrinhosBody"></tbody></table>
+        </div>
+      </div></div>
+
+      <!-- ============================ ADS ============================ -->
+      <div class="view" id="view-ads"><div class="page">
+        <div class="sub-header">
+          <div><h1 style="font-size:18px;font-weight:700;">ANÚNCIOS</h1><p style="font-size:12px;color:var(--text-secondary);">PRÜNE · Últimos 30 dias</p></div>
+          <div style="display:flex;gap:6px;align-items:center;"><button class="tab">Hoje</button><button class="tab">7d</button><button class="tab active">30d</button><button class="tab">Mês</button><button class="tab">Máx</button><button class="btn btn-gold">+ Novo Custo</button></div>
+        </div>
+        <div class="cards-grid cols-4" style="margin-bottom:16px;">
+          <div class="card"><div class="card-header"><div><div class="card-label">Total investido</div><div class="card-value">$ 0,00</div><div class="card-sub">0 lançamentos</div></div><div class="card-icon red">▣</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Média diária</div><div class="card-value">$ 0,00</div><div class="card-sub">média do período</div></div><div class="card-icon blue">▦</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">ROAS</div><div class="card-value">—</div><div class="card-sub">retorno sobre ads</div></div><div class="card-icon green">↑</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Lucro líquido</div><div class="card-value" style="color:var(--accent-green);">$ 0,00</div><div class="card-sub">receita − ads</div></div><div class="card-icon green">$</div></div></div>
+        </div>
+        <div class="ads-chart-wrap"><div class="card-label">Investimento Diário</div><div class="chart-big-value">$ 0,00</div><div class="chart-sub">Últimos 30 dias</div>
+          <svg class="chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none"><line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.04)"/></svg>
+        </div>
+        <div class="empty-state">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3>NENHUM CUSTO REGISTRADO</h3>
+          <p>Adicione os gastos com anúncios para acompanhar o ROAS e o lucro.</p>
+          <button class="btn btn-gold">+ Primeiro Lançamento</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ FRETES ============================ -->
+      <div class="view" id="view-fretes"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Fretes</h1><p style="font-size:12px;color:var(--text-secondary);">Métodos de entrega do checkout</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="card">
+          <div class="section-title">🚚 Métodos de Entrega</div>
+          <div id="fretesList"></div>
+          <hr class="divider" />
+          <div class="form-row"><div class="form-group"><label class="form-label">Nome do frete</label><input class="form-control" id="freteNome" placeholder="Ex: Econômico, Expresso…" /></div><div class="form-group"><label class="form-label">Preço (0 = grátis)</label><input class="form-control" id="fretePreco" type="number" value="0" /></div></div>
+          <div class="form-row"><div class="form-group"><label class="form-label">Dias mínimos</label><input class="form-control" id="freteMin" type="number" placeholder="3" /></div><div class="form-group"><label class="form-label">Dias máximos</label><input class="form-control" id="freteMax" type="number" placeholder="7" /></div></div>
+          <button class="btn btn-gold" id="freteAdd">+ Adicionar Frete</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ INTEGRAÇÕES ============================ -->
+      <div class="view" id="view-integracoes"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Integrações</h1><p style="font-size:12px;color:var(--text-secondary);">Gateway de pagamento</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="card">
+          <div class="section-title">▭ Gateway ativo</div>
+          <div class="cards-grid cols-2" style="margin-bottom:18px;">
+            <div class="gateway-card selected" data-gateway="whop"><div class="gateway-logo" style="background:#ff5a3c;color:#fff;">W</div><div class="metodoInfo" style="display:flex;flex-direction:column;"><strong style="display:flex;gap:8px;align-items:center;">Whop <span class="gw-badge ok">Configurado</span></strong><span style="font-size:11px;color:var(--text-secondary);">Embed Whop</span></div><span class="gw-radio"></span></div>
+            <div class="gateway-card" data-gateway="stripe"><div class="gateway-logo" style="background:#5539fd;color:#fff;">S</div><div class="metodoInfo" style="display:flex;flex-direction:column;"><strong style="display:flex;gap:8px;align-items:center;">Stripe <span class="gw-badge pend">Pendente</span></strong><span style="font-size:11px;color:var(--text-secondary);">Checkout próprio (Payment Element)</span></div><span class="gw-radio"></span></div>
+          </div>
+          <div class="section-title" style="font-size:12px;">⬡ Configuração Whop</div>
+          <div class="form-group"><label class="form-label">Whop Key (API)</label><input class="form-control" id="whopKey" type="password" value="••••••••••••••••••••••••••••••••••••" /><div class="form-hint">Chave de API do WHOP para processar pagamentos</div></div>
+          <div class="form-group"><label class="form-label">Whop Company ID</label><input class="form-control" id="whopCompany" value="biz_rEIQP9MIsW3Hbq" /><div class="form-hint">ID da sua empresa no WHOP (ex: biz_xxxxxxxx)</div></div>
+          <button class="btn btn-gold" id="gatewaySave">💾 Salvar Gateway</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ PRODUTOS ============================ -->
+      <div class="view" id="view-produtos"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Produtos <span class="badge success" id="prodDomain" style="margin-left:8px;">🌐 pago.outletprune-oficial.com</span></h1><p style="font-size:12px;color:var(--text-secondary);">Links de checkout avulsos por variante</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+
+        <div id="produtosList" style="margin-bottom:18px;"></div>
+
+        <div class="card">
+          <div class="section-title">+ Novo Produto</div>
+          <div class="form-row"><div class="form-group"><label class="form-label">Nome do produto</label><input class="form-control" id="prodNome" placeholder="Ex: Camiseta Premium" /></div><div class="form-group"><label class="form-label">Tipo</label><select class="form-control" id="prodTipo"><option value="fisico">Físico — pede endereço</option><option value="digital">Digital — sem endereço</option></select></div></div>
+          <div class="form-group"><label class="form-label">Descrição (opcional)</label><textarea class="form-control" id="prodDescricao" rows="3" placeholder="Descrição…"></textarea></div>
+          <div class="form-group"><label class="form-label">Imagem</label><input class="form-control" id="prodImagem" type="file" accept="image/*" /><div class="form-hint">PNG, JPEG ou WebP. Máximo 5MB.</div></div>
+          <div class="form-row cols-3">
+            <div class="form-group"><label class="form-label">Moeda</label><select class="form-control" id="prodMoeda"><option>USD</option><option>BRL</option><option>ARS</option><option>EUR</option></select></div>
+            <div class="form-group"><label class="form-label">Idioma</label><select class="form-control" id="prodIdioma"><option value="pt">BR Português</option><option value="es">ES Espanhol</option><option value="en">EN Inglês</option></select></div>
+            <div class="form-group"><label class="form-label">Cor do checkout</label><input class="form-control" id="prodCor" type="text" placeholder="#000000" /></div>
+          </div>
+          <div class="checkbox-row" style="border:none;padding:4px 0;"><input type="checkbox" id="prodDetMoeda" /><div class="checkbox-label"><strong>Detectar moeda por IP</strong></div></div>
+          <div class="checkbox-row" style="border:none;padding:4px 0;"><input type="checkbox" id="prodDetIdioma" /><div class="checkbox-label"><strong>Detectar idioma por IP</strong></div></div>
+          <button class="btn btn-gold" id="prodCriar" style="margin-top:8px;">📦 Criar Produto</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ PIXELS ============================ -->
+      <div class="view" id="view-pixels"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Pixels</h1><p style="font-size:12px;color:var(--text-secondary);">Rastreamento e conversões</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="pixel-section">
+          <div class="pixel-section-title">Pixel &amp; Conversões (Facebook)</div>
+          <div class="form-group"><label class="form-label">Pixel Facebook — ID</label><input class="form-control" id="fbPixel" placeholder="123456789" /><div class="form-hint">ID do seu Pixel Facebook</div></div>
+          <div class="form-group"><label class="form-label">Facebook — Token de acesso (CAPI)</label><input class="form-control" id="fbToken" type="password" placeholder="••••••••" /><div class="form-hint">Token de acesso para a Conversions API</div></div>
+          <button class="btn btn-gold" id="fbSave">💾 Salvar Facebook</button>
+        </div>
+        <div class="pixel-section">
+          <div class="pixel-section-title">♬ Pixel &amp; Eventos (TikTok)</div>
+          <div class="form-group"><label class="form-label">TikTok Pixel — ID</label><input class="form-control" id="ttPixel" value="D8BR3MJC77UBL2TTSUBG" /><div class="form-hint">ID do seu Pixel TikTok (ex: C1A2B3…)</div></div>
+          <div class="form-group"><label class="form-label">TikTok — Token de acesso (Events API)</label><input class="form-control" id="ttToken" type="password" value="••••••••••••••••••••••••••••" /><div class="form-hint">Access Token do Events API do TikTok</div></div>
+          <button class="btn btn-gold" id="ttSave">💾 Salvar TikTok</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ LOJAS ============================ -->
+      <div class="view" id="view-lojas"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">Suas Lojas</h1><p style="font-size:12px;color:var(--text-secondary);">Gerencie todas as suas lojas de checkout</p></div><button class="btn btn-gold" id="novaLoja">+ Nova Loja</button></div>
+        <div class="cards-grid cols-3" id="lojasGrid"></div>
+      </div></div>
+
+      <!-- ============================ DOMÍNIOS ============================ -->
+      <div class="view" id="view-dominios"><div class="page">
+        <div class="sub-header"><div><div style="font-size:10px;color:var(--text-secondary);letter-spacing:0.1em;text-transform:uppercase;">🌐 Domínios customizados</div><h1 style="font-size:18px;font-weight:700;">DOMÍNIOS</h1><p style="font-size:12px;color:var(--text-secondary);">PRÜNE · 1 domínio</p></div><button class="btn btn-gold">+ Adicionar Domínio</button></div>
+        <div class="info-box">
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <span>ℹ️</span>
+            <div style="flex:1;">
+              <p style="margin-bottom:8px;"><strong>COMO APONTAR SEU DOMÍNIO</strong></p>
+              <p style="margin-bottom:10px;">No painel DNS do seu provedor (Registro.br, GoDaddy, Cloudflare etc), crie um registro <strong>CNAME</strong> apontando o subdomínio escolhido para:</p>
+              <div class="copy-box"><span>pay.nonexcheckout.com</span><button class="copy-btn" data-copy="pay.nonexcheckout.com">⧉ Copiar</button></div>
+              <p style="margin-top:10px;font-size:10.5px;">Propagação típica: 5 minutos a 1 hora. Você pode cadastrar o domínio aqui <strong>antes</strong> do CNAME propagar — depois é só clicar em <strong>Verificar DNS</strong>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="domain-row">
+          <div style="flex:1;">
+            <div style="display:flex;align-items:center;gap:10px;"><span class="domain-name">pago.outletprune-oficial.com</span><span class="badge success dot">Ativo</span><span style="font-size:11px;color:var(--text-secondary);">expira em 88 dias</span></div>
+            <div class="domain-meta"><span>🔗 CNAME → pay.nonexcheckout.com</span><span>Emitido em 08/06/2026</span><span>Última checagem: 08/06 23:52</span><span>Criado em 08/06/2026 23:30</span></div>
+          </div>
+          <button class="btn btn-outline" style="font-size:10.5px;">↗ Abrir</button>
+          <button class="btn btn-outline" style="font-size:10.5px;">↻ Renovar</button>
+          <button class="icon-btn danger">🗑</button>
+        </div>
+      </div></div>
+
+      <!-- ============================ CONFIGURAÇÕES ============================ -->
+      <div class="view" id="view-configuracoes"><div class="page">
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Configurações</h1><p style="font-size:12px;color:var(--text-secondary);">ID do checkout: <code class="td-mono">loja11</code></p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <div class="section-title">🛍 Integração Shopify</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:14px 16px;">
+            <div><div id="shopStatus" style="color:var(--accent-green);font-weight:600;font-size:12px;">● Conectado via OAuth</div><div class="td-mono" id="cfgShopDomainLabel" style="font-size:12px;color:var(--text-secondary);margin-top:2px;">ydsepz-uu.myshopify.com</div></div>
+            <div style="display:flex;gap:8px;"><button class="btn btn-gold" id="shopSync">↻ Sincronizar Produtos</button><button class="btn btn-outline" id="shopDisconnect">Desconectar</button></div>
+          </div>
+          <details style="margin-top:12px;">
+            <summary style="font-size:11px;color:var(--text-muted);cursor:pointer;">▸ Conectar / alterar credenciais (app personalizado Shopify)</summary>
+            <div style="margin-top:12px;">
+              <div class="form-group"><label class="form-label">Domínio da loja (.myshopify.com)</label><input class="form-control" id="cfgShopDomain" placeholder="sualoja.myshopify.com" /></div>
+              <div class="form-group"><label class="form-label">Admin API access token</label><input class="form-control" id="cfgShopToken" type="password" placeholder="shpat_…" /><div class="form-hint">Shopify → Apps → Develop apps → seu app → Admin API access token (escopo read_products).</div></div>
+            </div>
+          </details>
+        </div>
+
+        <div class="card" style="margin-bottom:16px;">
+          <div class="section-title">⚡ Instalar Checkout na Loja</div>
+          <p style="font-size:12px;color:var(--text-secondary);margin-bottom:14px;">Com 1 clique, o botão de compra da sua loja Shopify passa a redirecionar para o seu checkout personalizado.</p>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--bg-input);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:14px 16px;">
+            <div style="color:var(--accent-green);font-weight:600;font-size:12px;">● Checkout ativo na loja</div>
+            <div style="display:flex;gap:8px;"><button class="btn btn-outline">Reinstalar</button><button class="btn btn-outline">Remover</button></div>
+          </div>
+          <p style="font-size:11px;color:var(--text-muted);margin-top:10px;">▸ Prefere colar manualmente? Ver código</p>
+        </div>
+
+        <div class="card">
+          <div class="section-title">⚙ Configurações Gerais</div>
+          <div class="form-row"><div class="form-group"><label class="form-label">Moeda</label><select class="form-control" id="cfgMoeda"><option>ARS - Peso Argentino</option><option>BRL - Real</option><option>USD - Dólar</option></select></div><div class="form-group"><label class="form-label">Idioma do checkout</label><select class="form-control" id="cfgIdioma"><option>ES Espanhol</option><option>BR Português</option><option>EN Inglês</option></select></div></div>
+          <div class="form-group"><label class="form-label">Cor do checkout (HEX)</label><input class="form-control" id="cfgCor" value="#000000" /></div>
+          <div class="form-group"><label class="form-label">Logo do checkout (upload)</label><input class="form-control" type="file" accept="image/*" /><div class="form-hint">PNG, JPEG ou WebP. Máximo 2MB.</div></div>
+          <hr class="divider" />
+          <div class="section-title" style="font-size:12px;">🌐 Detecção automática por IP</div>
+          <div class="checkbox-row"><input type="checkbox" id="cfgDetMoeda" /><div class="checkbox-label"><strong>Detectar moeda com base no IP do visitante</strong><p>Se ativado, a moeda será definida pelo país do visitante (ex: BR→BRL, US→USD).</p></div></div>
+          <div class="checkbox-row"><input type="checkbox" id="cfgDetIdioma" /><div class="checkbox-label"><strong>Detectar idioma com base no IP do visitante</strong><p>Se ativado, o idioma do checkout será definido pelo país do visitante.</p></div></div>
+          <button class="btn btn-gold" id="cfgSalvar" style="margin-top:8px;">💾 Salvar Configurações</button>
+        </div>
+      </div></div>
+
+    </div>
+  </div>
+
+  <!-- Scripts (arquivos comuns, sem onclick inline; funcionam via file://) -->
+  <!-- Three.js (CDN) para o globo 3D da Live View; offline cai no globo CSS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/navigation.js"></script>
+  <script src="js/globe.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

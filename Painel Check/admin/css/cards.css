@@ -1,0 +1,167 @@
+/* ===========================================================================
+   cards.css — KPIs, cards, cards de gráfico e funil de conversão
+   =========================================================================== */
+
+.cards-grid {
+  display: grid;
+  gap: 12px;
+}
+.cards-grid.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+.cards-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+.cards-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s;
+}
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+.card-icon.gold {
+  background: rgba(0, 164, 124, 0.12);
+  color: var(--gold-base);
+}
+.card-icon.green {
+  background: rgba(16, 217, 160, 0.1);
+  color: var(--accent-green);
+}
+.card-icon.blue {
+  background: rgba(56, 95, 147, 0.15);
+  color: #6b9fd4;
+}
+.card-icon.red {
+  background: rgba(224, 82, 82, 0.1);
+  color: var(--accent-red);
+}
+.card-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+.card-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+.card-value.gold {
+  color: var(--gold-base);
+}
+.card-sub {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.card-sub .pos {
+  color: var(--accent-green);
+}
+.card-sub .neg {
+  color: var(--accent-red);
+}
+
+/* CHART CARD */
+.chart-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+}
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.chart-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.chart-sub {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+.chart-big-value {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.chart-svg {
+  width: 100%;
+  height: 120px;
+}
+
+/* FUNNEL */
+.funnel-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.funnel-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.funnel-track {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.funnel-fill {
+  height: 100%;
+  border-radius: 4px;
+  background: var(--gold-base);
+}
+.funnel-fill.green {
+  background: var(--accent-green);
+}
+.funnel-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  width: 40px;
+  text-align: right;
+}
+.funnel-pct {
+  font-size: 10px;
+  color: var(--text-secondary);
+  width: 36px;
+  text-align: right;
+}

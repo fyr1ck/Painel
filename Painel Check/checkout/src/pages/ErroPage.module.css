@@ -1,0 +1,53 @@
+/* ErroPage.module.css — Erro (NOVA página) */
+.tela {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.card {
+  background: var(--co-card);
+  border: 1px solid var(--co-border);
+  border-radius: 16px;
+  box-shadow: var(--co-shadow);
+  padding: 40px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+.iconeWrap {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: #fdecec;
+  color: #d92d20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.titulo {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--co-text);
+  margin-bottom: 8px;
+}
+.sub {
+  font-size: 13.5px;
+  color: var(--co-muted);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+.botao {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  background: var(--cor-loja);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+.botao:hover {
+  filter: brightness(0.96);
+}

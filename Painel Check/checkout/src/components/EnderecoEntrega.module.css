@@ -1,0 +1,96 @@
+/* EnderecoEntrega.module.css — Etapa 2 (NOVO componente) */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--co-text);
+  margin-bottom: 2px;
+}
+.linha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.campo label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--co-muted);
+}
+.campo input {
+  padding: 11px 13px;
+  border: 1.5px solid var(--co-border);
+  border-radius: 9px;
+  outline: none;
+  background: #fff;
+  color: var(--co-text);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.campo input:focus {
+  border-color: var(--cor-loja);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-loja) 16%, transparent);
+}
+.cepCampo {
+  max-width: 200px;
+}
+.numeroCampo {
+  max-width: 120px;
+}
+.estadoCampo {
+  max-width: 140px;
+}
+.hint {
+  font-size: 11px;
+  color: var(--cor-loja);
+}
+.erro {
+  font-size: 11px;
+  color: #b42318;
+}
+.acoes {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+.voltar {
+  padding: 13px 18px;
+  border: 1px solid var(--co-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--co-muted);
+  font-weight: 600;
+}
+.voltar:hover {
+  border-color: var(--co-muted);
+}
+.avancar {
+  flex: 1;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--cor-loja);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+.avancar:hover {
+  filter: brightness(0.96);
+}
+@media (max-width: 540px) {
+  .linha {
+    grid-template-columns: 1fr;
+  }
+  .numeroCampo,
+  .estadoCampo,
+  .cepCampo {
+    max-width: none;
+  }
+}

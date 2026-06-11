@@ -1,0 +1,65 @@
+/* ===========================================================================
+   buttons.css — Botões e variantes
+   =========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+.btn-gold {
+  background: var(--gold-base);
+  color: #000;
+  border-color: var(--gold-base);
+}
+.btn-gold:hover {
+  background: var(--gold-bright);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-mid);
+}
+.btn-outline:hover {
+  border-color: var(--gold-border);
+  color: var(--gold-base);
+}
+.btn-danger {
+  background: rgba(224, 82, 82, 0.1);
+  color: var(--accent-red);
+  border-color: rgba(224, 82, 82, 0.2);
+}
+.btn-danger:hover {
+  background: rgba(224, 82, 82, 0.18);
+}
+.btn-icon {
+  padding: 6px;
+}
+.btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* BACK BTN */
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--text-secondary);
+  padding: 5px 12px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+}
+.back-btn:hover {
+  color: var(--gold-base);
+  border-color: var(--gold-border);
+}

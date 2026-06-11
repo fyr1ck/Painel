@@ -1,0 +1,44 @@
+/* ===========================================================================
+   responsive.css — Breakpoints (deve ser importado por ÚLTIMO)
+   =========================================================================== */
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    bottom: 0;
+    z-index: 200;
+    transition: left 0.2s;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .cards-grid.cols-4 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .cards-grid.cols-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .liveview-layout {
+    grid-template-columns: 1fr;
+  }
+  .liveview-left,
+  .liveview-right {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cards-grid.cols-4,
+  .cards-grid.cols-3,
+  .cards-grid.cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .topbar-breadcrumb .breadcrumb-title {
+    font-size: 11px;
+  }
+}

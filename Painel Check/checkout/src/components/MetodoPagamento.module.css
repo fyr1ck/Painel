@@ -1,0 +1,212 @@
+/* ===========================================================================
+   MetodoPagamento.module.css — Etapa de pagamento (Pix / Cartão)
+   RECONSTRUÍDO fielmente a partir das classes usadas em MetodoPagamento.jsx.
+   --------------------------------------------------------------------------- */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.titulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--co-text);
+}
+
+/* Seleção de método */
+.metodos {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.metodo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1.5px solid var(--co-border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.metodo:hover {
+  border-color: color-mix(in srgb, var(--cor-loja) 45%, var(--co-border));
+}
+.metodo.selecionado {
+  border-color: var(--cor-loja);
+  background: color-mix(in srgb, var(--cor-loja) 6%, #fff);
+}
+.metodo input {
+  accent-color: var(--cor-loja);
+  width: 16px;
+  height: 16px;
+}
+.metodoIcon {
+  font-size: 20px;
+  width: 28px;
+  text-align: center;
+}
+.metodoInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.metodoInfo strong {
+  font-size: 13.5px;
+}
+.metodoInfo span {
+  font-size: 11.5px;
+  color: var(--co-muted);
+}
+.desconto {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--cor-loja);
+  background: color-mix(in srgb, var(--cor-loja) 12%, #fff);
+  padding: 3px 8px;
+  border-radius: 20px;
+}
+
+/* Total */
+.totalFinal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f7f8fa;
+  border-radius: 10px;
+  font-size: 13.5px;
+  color: var(--co-muted);
+}
+.totalFinal strong {
+  font-size: 17px;
+  color: var(--co-text);
+}
+
+/* Ações */
+.acoes {
+  display: flex;
+  gap: 10px;
+}
+.voltarBtn {
+  padding: 13px 18px;
+  border: 1px solid var(--co-border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--co-muted);
+  font-weight: 600;
+}
+.voltarBtn:hover {
+  border-color: var(--co-muted);
+}
+.pagarBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+  border: none;
+  border-radius: 10px;
+  background: var(--cor-loja);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+}
+.pagarBtn:hover {
+  filter: brightness(0.96);
+}
+.pagarBtn:disabled,
+.voltarBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.ssl {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--co-muted);
+}
+
+/* ── Tela de Pix gerado ── */
+.pixCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.pixHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pixIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--cor-loja) 12%, #fff);
+  color: var(--cor-loja);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.pixTitulo {
+  font-size: 15px;
+  font-weight: 700;
+}
+.pixSub {
+  font-size: 12px;
+  color: var(--co-muted);
+}
+.qrWrap {
+  display: flex;
+  justify-content: center;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--co-border);
+  border-radius: 10px;
+}
+.qrCode {
+  width: 200px;
+  height: 200px;
+}
+.pixCodigo {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+}
+.codigoTexto {
+  flex: 1;
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 11px;
+  padding: 10px 12px;
+  background: #f7f8fa;
+  border: 1px solid var(--co-border);
+  border-radius: 8px;
+  word-break: break-all;
+  max-height: 64px;
+  overflow-y: auto;
+}
+.copiarBtn {
+  padding: 0 16px;
+  border: 1px solid var(--cor-loja);
+  border-radius: 8px;
+  background: var(--cor-loja);
+  color: #fff;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.copiarBtn.copiado {
+  background: #fff;
+  color: var(--cor-loja);
+}
+.pixInfo {
+  font-size: 12px;
+  color: var(--co-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.pixInfo strong {
+  color: var(--co-text);
+}

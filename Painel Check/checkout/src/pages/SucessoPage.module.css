@@ -1,0 +1,65 @@
+/* SucessoPage.module.css — Confirmação (NOVA página) */
+.tela {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.card {
+  background: var(--co-card);
+  border: 1px solid var(--co-border);
+  border-radius: 16px;
+  box-shadow: var(--co-shadow);
+  padding: 40px 32px;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+}
+.checkWrap {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--cor-loja) 14%, #fff);
+  color: var(--cor-loja);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.titulo {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--co-text);
+  margin-bottom: 8px;
+}
+.sub {
+  font-size: 13.5px;
+  color: var(--co-muted);
+  line-height: 1.6;
+  margin-bottom: 22px;
+}
+.refBox {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  background: #f7f8fa;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+.refBox span {
+  font-size: 11px;
+  color: var(--co-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.refBox strong {
+  font-size: 16px;
+  font-family: "SF Mono", monospace;
+  color: var(--co-text);
+}
+.rodape {
+  font-size: 12px;
+  color: var(--co-muted);
+}
