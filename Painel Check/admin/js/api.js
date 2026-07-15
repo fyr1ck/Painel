@@ -26,17 +26,31 @@ window.API = (function () {
   function save(key, val) {
     try { localStorage.setItem(key, JSON.stringify(val)); } catch (e) {}
   }
+  // Monta os parâmetros do link de checkout (preço em centavos, moeda, loja, nome).
+  // Imagem só entra na URL se for http(s) — base64 não vai pra link.
+  function montarQuery(prod) {
+    var preco = Math.round((parseFloat(prod.preco) || 0) * 100);
+    var parts = [
+      'loja_id=' + encodeURIComponent(prod.loja_id || ''),
+      'nome=' + encodeURIComponent(prod.nome || ''),
+      'preco=' + preco,
+      'moeda=' + encodeURIComponent(prod.moeda || 'ARS'),
+      'idioma=' + encodeURIComponent(prod.idioma || 'es')
+    ];
+    if (prod.imagem && /^https?:\/\//.test(prod.imagem)) parts.push('img=' + encodeURIComponent(prod.imagem));
+    return parts.join('&');
+  }
 
   // ----- Seed (mesmos dados das telas reais) --------------------------------
   function seed() {
     if (!localStorage.getItem('rone_lojas')) {
       save('rone_lojas', [
-        { id: 'loja_11', nome: 'PRÜNE', checkout_id: 'loja11', moeda: 'ARS',
+        { id: 'loja_11', nome: 'Minha Loja', checkout_id: 'loja11', moeda: 'ARS',
           idioma: 'es', cor: '#000000', logo: '', shopify_connected: true,
           whop_connected: true, shopify_domain: 'ydsepz-uu.myshopify.com',
           whop_company_id: 'biz_rEIQP9MIsW3Hbq', gateway: 'whop',
           pixel_tt: 'D8BR3MJC77UBL2TTSUBG', ativo: true },
-        { id: 'loja_1', nome: 'PRÜNE', checkout_id: 'loja1', moeda: 'BRL',
+        { id: 'loja_1', nome: 'Loja 2', checkout_id: 'loja1', moeda: 'BRL',
           idioma: 'pt', cor: '#000000', logo: '', shopify_connected: false,
           whop_connected: false, shopify_domain: '', whop_company_id: '', ativo: true }
       ]);
@@ -59,6 +73,14 @@ window.API = (function () {
         { id: uid('cart'), loja_id: 'loja_11', cliente_email: 'silpa@example.com', step: 'email', valor: 75345.60, ip: '190.18.253.79', quando: 'há 9h' }
       ]);
     }
+    if (!localStorage.getItem('rone_fretes')) save('rone_fretes', [
+      { id: 'f1', loja_id: 'loja_11', nome: 'Env\u00edo gratis', preco: 0 },
+      { id: 'f2', loja_id: 'loja_11', nome: 'Env\u00edo prioritario', preco: 9997 }
+    ]);
+    if (!localStorage.getItem('rone_dominios')) save('rone_dominios', [
+      { id: 'dom1', loja_id: 'loja_11', dominio: 'pago.outletprune-oficial.com', status: 'Ativo', expira: '88', criado: '08/06/2026' }
+    ]);
+    if (!localStorage.getItem('rone_ads')) save('rone_ads', []);
   }
   seed();
 
@@ -129,7 +151,7 @@ window.API = (function () {
         if (i >= 0) prods[i] = Object.assign(prods[i], prod);
       } else {
         prod.id = uid('prod');
-        prod.checkout_url = '/pay/' + prod.id;
+        prod.checkout_url = '/pay/' + prod.id + '?' + montarQuery(prod);
         prod.created_at = new Date().toISOString();
         prods.unshift(prod);
       }
@@ -182,6 +204,54 @@ window.API = (function () {
       lojas[i].whop_connected = !!(lojas[i].whop_key && lojas[i].whop_company_id);
       save('rone_lojas', lojas);
       return Promise.resolve({ sucesso: true, loja: lojas[i] });
+    },
+
+    // ---- FRETES ----
+    listFretes: function (lojaId) {
+      if (USE_BACKEND) return get('/api/fretes_list.php?loja_id=' + encodeURIComponent(lojaId)).then(function (r) { return r.fretes || []; });
+      var f = load('rone_fretes', []); return Promise.resolve(lojaId ? f.filter(function (x) { return x.loja_id === lojaId; }) : f);
+    },
+    saveFrete: function (frete) {
+      if (USE_BACKEND) return post('/api/frete_save.php', frete);
+      var f = load('rone_fretes', []);
+      if (frete.id) { var i = f.findIndex(function (x) { return x.id === frete.id; }); if (i >= 0) f[i] = Object.assign(f[i], frete); }
+      else { frete.id = uid('f'); f.push(frete); }
+      save('rone_fretes', f); return Promise.resolve({ sucesso: true, frete: frete });
+    },
+    deleteFrete: function (id) {
+      if (USE_BACKEND) return post('/api/frete_delete.php', { id: id });
+      save('rone_fretes', load('rone_fretes', []).filter(function (x) { return x.id !== id; })); return Promise.resolve({ sucesso: true });
+    },
+
+    // ---- DOMÍNIOS ----
+    listDominios: function (lojaId) {
+      if (USE_BACKEND) return get('/api/dominios_list.php?loja_id=' + encodeURIComponent(lojaId)).then(function (r) { return r.dominios || []; });
+      var d = load('rone_dominios', []); return Promise.resolve(lojaId ? d.filter(function (x) { return x.loja_id === lojaId; }) : d);
+    },
+    saveDominio: function (dom) {
+      if (USE_BACKEND) return post('/api/dominio_save.php', dom);
+      var d = load('rone_dominios', []);
+      if (dom.id) { var i = d.findIndex(function (x) { return x.id === dom.id; }); if (i >= 0) d[i] = Object.assign(d[i], dom); }
+      else { dom.id = uid('dom'); dom.status = dom.status || 'Ativo'; dom.expira = dom.expira || '88'; d.push(dom); }
+      save('rone_dominios', d); return Promise.resolve({ sucesso: true, dominio: dom });
+    },
+    deleteDominio: function (id) {
+      if (USE_BACKEND) return post('/api/dominio_delete.php', { id: id });
+      save('rone_dominios', load('rone_dominios', []).filter(function (x) { return x.id !== id; })); return Promise.resolve({ sucesso: true });
+    },
+
+    // ---- ADS (custos) ----
+    listAds: function (lojaId) {
+      if (USE_BACKEND) return get('/api/ads_list.php?loja_id=' + encodeURIComponent(lojaId)).then(function (r) { return r.ads || []; });
+      var a = load('rone_ads', []); return Promise.resolve(lojaId ? a.filter(function (x) { return x.loja_id === lojaId; }) : a);
+    },
+    saveAd: function (ad) {
+      if (USE_BACKEND) return post('/api/ad_save.php', ad);
+      var a = load('rone_ads', []); ad.id = uid('ad'); a.unshift(ad); save('rone_ads', a); return Promise.resolve({ sucesso: true, ad: ad });
+    },
+    deleteAd: function (id) {
+      if (USE_BACKEND) return post('/api/ad_delete.php', { id: id });
+      save('rone_ads', load('rone_ads', []).filter(function (x) { return x.id !== id; })); return Promise.resolve({ sucesso: true });
     }
   };
 })();

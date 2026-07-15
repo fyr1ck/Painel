@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rone · Entrar</title>
+  <link rel="stylesheet" href="css/globals.css" />
+  <link rel="stylesheet" href="css/forms.css" />
+  <link rel="stylesheet" href="css/buttons.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <style>
+    body { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+    .login-card {
+      width: 100%; max-width: 380px; background: var(--bg-card);
+      border: 1px solid var(--border-mid); border-radius: var(--radius-lg);
+      padding: 30px 26px; box-shadow: 0 24px 70px rgba(0, 0, 0, 0.6);
+    }
+    .login-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 22px; }
+    .login-logo .mark {
+      width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center;
+      background: var(--gold-base); color: #00130d; font-weight: 800; font-size: 18px;
+    }
+    .login-logo .txt { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+    .login-logo .badge { font-size: 9px; color: var(--text-muted); letter-spacing: 0.12em; }
+    .login-err { color: var(--accent-red); font-size: 12px; margin-top: 10px; min-height: 16px; }
+    .login-hint { font-size: 11px; color: var(--text-muted); margin-top: 16px; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="login-card">
+    <div class="login-logo">
+      <div class="mark">r</div>
+      <div><div class="txt">rone</div><div class="badge">ADMIN</div></div>
+    </div>
+    <h2 id="loginTitle" style="font-size:17px;font-weight:700;margin-bottom:4px;">Entrar</h2>
+    <p id="loginSub" style="font-size:12px;color:var(--text-secondary);margin-bottom:18px;">Acesse o painel.</p>
+
+    <div class="form-group"><label class="form-label">E-mail</label><input class="form-control" id="email" type="email" placeholder="voce@email.com" /></div>
+    <div class="form-group"><label class="form-label">Senha</label><input class="form-control" id="pass" type="password" placeholder="••••••••" /></div>
+    <div class="form-group" id="pass2Wrap" style="display:none;"><label class="form-label">Confirmar senha</label><input class="form-control" id="pass2" type="password" placeholder="••••••••" /></div>
+
+    <button class="btn btn-gold" id="submit" style="width:100%;justify-content:center;margin-top:6px;">Entrar</button>
+    <div class="login-err" id="err"></div>
+    <div class="login-hint" id="hint"></div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+      var $ = function (s) { return document.querySelector(s); };
+
+      // Hash da senha (SHA-256 quando disponível; fallback simples sem subtle).
+      async function hashPass(t) {
+        if (window.crypto && crypto.subtle) {
+          var buf = new TextEncoder().encode(t);
+          var h = await crypto.subtle.digest('SHA-256', buf);
+          return Array.from(new Uint8Array(h)).map(function (x) { return x.toString(16).padStart(2, '0'); }).join('');
+        }
+        var h = 5381;
+        for (var i = 0; i < t.length; i++) { h = ((h << 5) + h) + t.charCodeAt(i); }
+        return 'f' + (h >>> 0).toString(16);
+      }
+      function getAdmin() { try { return JSON.parse(localStorage.getItem('rone_admin') || 'null'); } catch (e) { return null; } }
+      function setAuth(email) {
+        localStorage.setItem('rone_auth', 'tok_' + Date.now());
+        localStorage.setItem('rone_auth_email', email);
+        location.replace('index.html');
+      }
+
+      var admin = getAdmin();
+      var creating = !admin;   // primeira vez → cria a conta admin
+
+      if (creating) {
+        $('#loginTitle').textContent = 'Criar conta admin';
+        $('#loginSub').textContent = 'Defina o e-mail e a senha do administrador.';
+        $('#pass2Wrap').style.display = '';
+        $('#submit').textContent = 'Criar conta';
+        $('#hint').textContent = 'Esta será sua conta de acesso total ao painel.';
+      } else {
+        $('#hint').textContent = 'Entre com a conta admin que você criou.';
+      }
+
+      async function go() {
+        $('#err').textContent = '';
+        var email = $('#email').value.trim().toLowerCase();
+        var pass = $('#pass').value;
+        if (!email || !pass) { $('#err').textContent = 'Preencha e-mail e senha.'; return; }
+
+        if (creating) {
+          if (pass.length < 6) { $('#err').textContent = 'A senha precisa ter ao menos 6 caracteres.'; return; }
+          if (pass !== $('#pass2').value) { $('#err').textContent = 'As senhas não conferem.'; return; }
+          var hash = await hashPass(pass);
+          localStorage.setItem('rone_admin', JSON.stringify({ email: email, hash: hash, role: 'admin' }));
+          setAuth(email);
+        } else {
+          var h = await hashPass(pass);
+          if (email === admin.email && h === admin.hash) { setAuth(email); }
+          else { $('#err').textContent = 'E-mail ou senha incorretos.'; }
+        }
+      }
+
+      $('#submit').addEventListener('click', go);
+      $('#pass').addEventListener('keyup', function (e) { if (e.key === 'Enter') go(); });
+      $('#pass2').addEventListener('keyup', function (e) { if (e.key === 'Enter') go(); });
+    })();
+  </script>
+</body>
+</html>

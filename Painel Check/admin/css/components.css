@@ -438,3 +438,31 @@
 .globe.three-on { background: none; box-shadow: 0 0 90px rgba(0, 110, 200, 0.22); }
 .globe.three-on::before, .globe.three-on::after { content: none; }
 .globe.three-on .globe-hint { z-index: 2; }
+
+/* ===========================================================================
+   Modal (substitui prompt/confirm, que são bloqueados em iframes de preview)
+   =========================================================================== */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0, 0, 0, 0.6);
+  display: none; align-items: center; justify-content: center; z-index: 10000;
+  backdrop-filter: blur(2px);
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  width: 100%; max-width: 440px; background: var(--bg-card);
+  border: 1px solid var(--border-mid); border-radius: var(--radius-lg);
+  padding: 22px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+.modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); }
+.modal .modal-sub { font-size: 12px; color: var(--text-secondary); margin-bottom: 16px; }
+.modal .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px; }
+
+/* Linha de domínio / custo de ad reutilizam .domain-row já existente */
+.ad-row {
+  display: flex; align-items: center; gap: 14px; background: var(--bg-card);
+  border: 1px solid var(--border-subtle); border-radius: var(--radius-md);
+  padding: 12px 16px; margin-bottom: 10px;
+}
+.ad-row .ad-plat { font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.ad-row .ad-date { font-size: 11px; color: var(--text-secondary); }
+.ad-row .ad-amount { margin-left: auto; font-family: var(--font-mono); color: var(--accent-red); }

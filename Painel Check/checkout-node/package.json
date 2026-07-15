@@ -1,0 +1,8 @@
+{
+  "name": "rone-checkout-node",
+  "version": "1.1.0",
+  "description": "Checkout nativo (Node puro) integrado ao painel rone — corrigido e dinâmico",
+  "main": "app.js",
+  "scripts": { "start": "node app.js" },
+  "license": "ISC"
+}

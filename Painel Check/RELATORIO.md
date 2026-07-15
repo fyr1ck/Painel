@@ -229,3 +229,81 @@ As telas de credenciais agora **salvam e persistem** de verdade:
 
 O passo a passo completo de cada conexão está em `backend/BACKEND.md`
 ("Como conectar suas APIs").
+
+---
+
+# Atualização 2 — login, botões corrigidos, PRÜNE removido e dados reais
+
+## Sistema de login (conta admin)
+Adicionada a tela `login.html` + `js/auth.js`. No primeiro acesso você **cria sua
+conta admin** (e-mail + senha); depois o painel fica **bloqueado sem login** e o
+botão **Sair** encerra a sessão. No backend há `auth/register.php` e
+`auth/login.php` com senha em bcrypt para uso em produção.
+
+## Por que os botões "não funcionavam" — corrigido
+A causa era dupla: (1) **`prompt()`/`confirm()` são bloqueados** dentro do preview
+do VS Code (iframe), e (2) "Novo Custo", "Adicionar Domínio" e "Primeiro
+Lançamento" estavam **sem ação ligada**. Troquei todos os `prompt/confirm` por um
+**modal na própria página** e liguei todos os botões. Agora **Nova Loja**,
+**Adicionar Domínio**, **Novo Custo/Primeiro Lançamento**, **Adicionar Frete**,
+editar/excluir loja e produto — todos funcionam.
+
+## PRÜNE removido
+Não há mais "PRÜNE" fixo: o nome da loja é **dinâmico** (puxa a loja ativa) em
+todos os cabeçalhos, no seletor e nas telas. As lojas de exemplo agora se chamam
+"Minha Loja" e "Loja 2".
+
+## Pedidos, Carrinhos e Ads com dados reais
+- **Carrinhos:** os números (abandonados, valor perdido, contagem) agora são
+  **calculados a partir dos dados**, não mais fixos. Quando o backend estiver no
+  ar, vêm do banco; carrinho abandonado = sessão de checkout sem pagamento.
+- **Pedidos:** lista e contagem calculadas; mostram estado vazio quando não há
+  pedidos. Pedidos reais entram quando o checkout registra a venda e o webhook da
+  Whop/Stripe marca como pago.
+- **Ads:** virou um **controle de custos** — você lança o gasto (plataforma, data,
+  valor) e o painel calcula **Total investido, Média diária, ROAS e Lucro líquido**
+  (ROAS = receita das vendas pagas ÷ gasto; lucro = receita − gasto). CRUD completo.
+- **Fretes:** adicionar método + preço **persiste e valida** (preço ≥ 0, nome
+  obrigatório) — sem erro ao salvar. Alimenta o checkout.
+
+## Integrações (respostas diretas)
+- **Stripe/Whop:** o painel guarda suas chaves por loja; o `create_payment.php`
+  processa a cobrança de verdade com elas. **Sim, dá para plugar sua API direto.**
+- **Produtos → Shopify:** a tela Produtos cria **links de checkout**; para mandar
+  ao **catálogo da Shopify** use `shopify_push.php` (escopo write_products).
+- **Pixels:** o disparo no navegador (Meta/TikTok) já é **real**; o CAPI
+  server-side roda pelo backend.
+
+> Limite honesto: PHP não roda neste ambiente — toda a lógica de dados foi testada
+> no Node, e os endpoints PHP (incluindo cobrança e Shopify) estão escritos e
+> revisados para você rodar no seu host. As cobranças reais e a criação de produto
+> na Shopify só dá para validar com suas chaves no servidor.
+
+---
+
+# Atualização 3 — Pedidos/Carrinhos reais + checkout do sócio integrado
+
+## Pedidos e Carrinhos: eram exemplo, agora integram de verdade
+Confirmado: os números eram **dados de exemplo** (HTML), e o funil "111 sessões"
+era fixo. Mudanças:
+- **"Valor perdido" removido** da tela de Carrinhos.
+- **Funil agora é calculado** a partir dos pedidos + carrinhos reais (visitou →
+  email → endereço → pagamento → comprou), com taxa de conversão e "parou no
+  pagamento" também calculados.
+- Criados os endpoints `checkout_order.php` (o checkout grava o pedido) e
+  `checkout_track.php` (rastreia o carrinho). Com o backend ligado, as telas
+  Pedidos e Carrinhos passam a contar de verdade.
+
+## Checkout do seu sócio: verificado e corrigido
+A versão enviada estava **quebrada**: template escapado (mostrava `${...}` na
+tela), funções `enviarPagamento`/`alterarFreteDoPainel` ausentes, preço fixo, sem
+gravar pedido e capturando cartão no servidor (risco PCI). Entreguei uma versão
+corrigida em `checkout-node/` que:
+- renderiza certo, com **preço/moeda/logo/produto/frete dinâmicos** vindos do painel;
+- **grava o pedido e rastreia o carrinho** no painel (alimenta Pedidos/Carrinhos/funil);
+- faz o pagamento pelo **provedor** (Whop/Stripe via `create_payment.php`), sem
+  capturar cartão no servidor.
+
+Testado de ponta a ponta: o painel gera o link do produto com preço, e o checkout
+renderiza com o valor correto. O elo checkout→painel (gravar pedido) usa os
+endpoints PHP — escritos e revisados, para rodar no seu host.

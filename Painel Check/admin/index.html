@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/buttons.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="stylesheet" href="css/responsive.css" />
+  <script src="js/auth.js"></script>
 </head>
 <body>
   <div class="app">
@@ -24,7 +25,7 @@
       </div>
 
       <div class="store-selector" data-view="lojas">
-        <div><div class="store-name" id="storeSelectorName">PRÜNE</div></div>
+        <div><div class="store-name" id="storeSelectorName" data-store>Loja</div></div>
         <div class="store-chevron">▼</div>
       </div>
 
@@ -51,7 +52,7 @@
 
       <div class="sidebar-section">
         <div class="sidebar-section-label">Conta</div>
-        <div class="nav-item"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zM2 14a6 6 0 0112 0" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Sair</div>
+        <div class="nav-item" id="navLogout"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zM2 14a6 6 0 0112 0" stroke="currentColor" stroke-width="1.2" fill="none"/></svg>Sair</div>
       </div>
 
       <div class="sidebar-footer">
@@ -83,7 +84,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
           <div>
             <div style="font-size:10px;color:var(--gold-base);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;"><span class="live-dot"></span> LIVE DATA</div>
-            <h1 style="font-size:24px;font-weight:800;color:var(--text-primary);letter-spacing:-0.5px;">PRÜNE</h1>
+            <h1 style="font-size:24px;font-weight:800;color:var(--text-primary);letter-spacing:-0.5px;"><span data-store>Loja</span></h1>
             <div style="font-size:11px;color:var(--text-secondary);">Últimos 30 dias</div>
           </div>
           <div style="display:flex;gap:6px;align-items:center;">
@@ -183,19 +184,18 @@
       <!-- ============================ CARRINHOS ============================ -->
       <div class="view" id="view-carrinhos"><div class="page">
         <div class="tabs"><button class="tab">Hoje</button><button class="tab">Ontem</button><button class="tab">Últimos 7 dias</button><button class="tab">Últimos 30 dias</button><button class="tab active">Máximo</button></div>
-        <div class="cards-grid cols-4" style="margin-bottom:16px;">
+        <div class="cards-grid" style="grid-template-columns:repeat(3,1fr);margin-bottom:16px;">
           <div class="card"><div class="card-header"><div><div class="card-value" id="cartAbandonados">0</div><div class="card-sub">Abandonados</div></div><div class="card-icon gold">🛒</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-value" id="cartPerdido">$ 0,00</div><div class="card-sub">Valor perdido</div></div><div class="card-icon red">↘</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-value">0,0%</div><div class="card-sub">Taxa de conversão</div></div><div class="card-icon blue">%</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-value">0</div><div class="card-sub">Parou no pagamento</div></div><div class="card-icon gold">▢</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-value" id="cartConv">0,0%</div><div class="card-sub">Taxa de conversão</div></div><div class="card-icon blue">%</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-value" id="cartParou">0</div><div class="card-sub">Parou no pagamento</div></div><div class="card-icon gold">▢</div></div></div>
         </div>
         <div class="card" style="margin-bottom:16px;">
-          <div class="section-title" style="justify-content:space-between;"><span>Funil de checkout</span><span style="font-size:11px;color:var(--text-secondary);">111 sessões</span></div>
-          <div class="funnel-bar"><div class="funnel-label">👁 Visitou checkout</div><div class="funnel-track"><div class="funnel-fill" style="width:100%;background:#5a5a5a;"></div></div><div class="funnel-count">111</div><div class="funnel-pct">100%</div></div>
-          <div class="funnel-bar"><div class="funnel-label">✉ Informou e-mail</div><div class="funnel-track"><div class="funnel-fill" style="width:36%;background:#4a4a4a;"></div></div><div class="funnel-count">40</div><div class="funnel-pct">36%</div></div>
-          <div class="funnel-bar"><div class="funnel-label">📍 Informou endereço</div><div class="funnel-track"><div class="funnel-fill" style="width:12.6%;background:#3a3a3a;"></div></div><div class="funnel-count">14</div><div class="funnel-pct">12,6%</div></div>
-          <div class="funnel-bar"><div class="funnel-label">▢ Chegou no pagamento</div><div class="funnel-track"><div class="funnel-fill" style="width:2%;background:#2a2a2a;"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
-          <div class="funnel-bar"><div class="funnel-label">✓ Comprou</div><div class="funnel-track"><div class="funnel-fill" style="width:1%;background:var(--accent-green);"></div></div><div class="funnel-count">0</div><div class="funnel-pct">0%</div></div>
+          <div class="section-title" style="justify-content:space-between;"><span>Funil de checkout</span><span style="font-size:11px;color:var(--text-secondary);"><span id="fnSessoes">0</span> sessões</span></div>
+          <div class="funnel-bar"><div class="funnel-label">👁 Visitou checkout</div><div class="funnel-track"><div class="funnel-fill" id="fnVisitFill" style="width:100%;background:#5a5a5a;"></div></div><div class="funnel-count" id="fnVisitCount">0</div><div class="funnel-pct" id="fnVisitPct">100%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">✉ Informou e-mail</div><div class="funnel-track"><div class="funnel-fill" id="fnEmailFill" style="width:0%;background:#4a4a4a;"></div></div><div class="funnel-count" id="fnEmailCount">0</div><div class="funnel-pct" id="fnEmailPct">0%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">📍 Informou endereço</div><div class="funnel-track"><div class="funnel-fill" id="fnEndFill" style="width:0%;background:#3a3a3a;"></div></div><div class="funnel-count" id="fnEndCount">0</div><div class="funnel-pct" id="fnEndPct">0%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">▢ Chegou no pagamento</div><div class="funnel-track"><div class="funnel-fill" id="fnPayFill" style="width:0%;background:#2a2a2a;"></div></div><div class="funnel-count" id="fnPayCount">0</div><div class="funnel-pct" id="fnPayPct">0%</div></div>
+          <div class="funnel-bar"><div class="funnel-label">✓ Comprou</div><div class="funnel-track"><div class="funnel-fill" id="fnBuyFill" style="width:0%;background:var(--accent-green);"></div></div><div class="funnel-count" id="fnBuyCount">0</div><div class="funnel-pct" id="fnBuyPct">0%</div></div>
         </div>
         <div class="sub-header"><div><h2 style="font-size:15px;font-weight:700;">Carrinhos Abandonados</h2><p style="font-size:12px;color:var(--text-secondary);"><span id="cartCount">0</span> carrinho(s)</p></div></div>
         <div class="table-wrap">
@@ -207,29 +207,30 @@
       <!-- ============================ ADS ============================ -->
       <div class="view" id="view-ads"><div class="page">
         <div class="sub-header">
-          <div><h1 style="font-size:18px;font-weight:700;">ANÚNCIOS</h1><p style="font-size:12px;color:var(--text-secondary);">PRÜNE · Últimos 30 dias</p></div>
-          <div style="display:flex;gap:6px;align-items:center;"><button class="tab">Hoje</button><button class="tab">7d</button><button class="tab active">30d</button><button class="tab">Mês</button><button class="tab">Máx</button><button class="btn btn-gold">+ Novo Custo</button></div>
+          <div><h1 style="font-size:18px;font-weight:700;">ANÚNCIOS</h1><p style="font-size:12px;color:var(--text-secondary);"><span data-store>Loja</span> · Últimos 30 dias</p></div>
+          <div style="display:flex;gap:6px;align-items:center;"><button class="tab">Hoje</button><button class="tab">7d</button><button class="tab active">30d</button><button class="tab">Mês</button><button class="tab">Máx</button><button class="btn btn-gold" id="adNovo">+ Novo Custo</button></div>
         </div>
         <div class="cards-grid cols-4" style="margin-bottom:16px;">
-          <div class="card"><div class="card-header"><div><div class="card-label">Total investido</div><div class="card-value">$ 0,00</div><div class="card-sub">0 lançamentos</div></div><div class="card-icon red">▣</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-label">Média diária</div><div class="card-value">$ 0,00</div><div class="card-sub">média do período</div></div><div class="card-icon blue">▦</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-label">ROAS</div><div class="card-value">—</div><div class="card-sub">retorno sobre ads</div></div><div class="card-icon green">↑</div></div></div>
-          <div class="card"><div class="card-header"><div><div class="card-label">Lucro líquido</div><div class="card-value" style="color:var(--accent-green);">$ 0,00</div><div class="card-sub">receita − ads</div></div><div class="card-icon green">$</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Total investido</div><div class="card-value" id="adTotal">$ 0,00</div><div class="card-sub" id="adTotalSub">0 lançamentos</div></div><div class="card-icon red">▣</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Média diária</div><div class="card-value" id="adMedia">$ 0,00</div><div class="card-sub">média do período</div></div><div class="card-icon blue">▦</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">ROAS</div><div class="card-value" id="adRoas">—</div><div class="card-sub">retorno sobre ads</div></div><div class="card-icon green">↑</div></div></div>
+          <div class="card"><div class="card-header"><div><div class="card-label">Lucro líquido</div><div class="card-value" id="adLucro" style="color:var(--accent-green);">$ 0,00</div><div class="card-sub">receita − ads</div></div><div class="card-icon green">$</div></div></div>
         </div>
-        <div class="ads-chart-wrap"><div class="card-label">Investimento Diário</div><div class="chart-big-value">$ 0,00</div><div class="chart-sub">Últimos 30 dias</div>
+        <div class="ads-chart-wrap"><div class="card-label">Investimento Diário</div><div class="chart-big-value" id="adInvestDiario">$ 0,00</div><div class="chart-sub">Últimos 30 dias</div>
           <svg class="chart-svg" viewBox="0 0 400 120" preserveAspectRatio="none"><line x1="0" y1="30" x2="400" y2="30" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="60" x2="400" y2="60" stroke="rgba(255,255,255,0.04)"/><line x1="0" y1="90" x2="400" y2="90" stroke="rgba(255,255,255,0.04)"/></svg>
         </div>
-        <div class="empty-state">
+        <div id="adsList" style="margin-top:14px;"></div>
+        <div class="empty-state" id="adsEmpty">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           <h3>NENHUM CUSTO REGISTRADO</h3>
           <p>Adicione os gastos com anúncios para acompanhar o ROAS e o lucro.</p>
-          <button class="btn btn-gold">+ Primeiro Lançamento</button>
+          <button class="btn btn-gold" id="adPrimeiro">+ Primeiro Lançamento</button>
         </div>
       </div></div>
 
       <!-- ============================ FRETES ============================ -->
       <div class="view" id="view-fretes"><div class="page">
-        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Fretes</h1><p style="font-size:12px;color:var(--text-secondary);">Métodos de entrega do checkout</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;"><span data-store>Loja</span> — Fretes</h1><p style="font-size:12px;color:var(--text-secondary);">Métodos de entrega do checkout</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
         <div class="card">
           <div class="section-title">🚚 Métodos de Entrega</div>
           <div id="fretesList"></div>
@@ -242,7 +243,7 @@
 
       <!-- ============================ INTEGRAÇÕES ============================ -->
       <div class="view" id="view-integracoes"><div class="page">
-        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Integrações</h1><p style="font-size:12px;color:var(--text-secondary);">Gateway de pagamento</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;"><span data-store>Loja</span> — Integrações</h1><p style="font-size:12px;color:var(--text-secondary);">Gateway de pagamento</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
         <div class="card">
           <div class="section-title">▭ Gateway ativo</div>
           <div class="cards-grid cols-2" style="margin-bottom:18px;">
@@ -258,13 +259,13 @@
 
       <!-- ============================ PRODUTOS ============================ -->
       <div class="view" id="view-produtos"><div class="page">
-        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Produtos <span class="badge success" id="prodDomain" style="margin-left:8px;">🌐 pago.outletprune-oficial.com</span></h1><p style="font-size:12px;color:var(--text-secondary);">Links de checkout avulsos por variante</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;"><span data-store>Loja</span> — Produtos <span class="badge success" id="prodDomain" style="margin-left:8px;">🌐 pago.outletprune-oficial.com</span></h1><p style="font-size:12px;color:var(--text-secondary);">Links de checkout avulsos por variante</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
 
         <div id="produtosList" style="margin-bottom:18px;"></div>
 
         <div class="card">
           <div class="section-title">+ Novo Produto</div>
-          <div class="form-row"><div class="form-group"><label class="form-label">Nome do produto</label><input class="form-control" id="prodNome" placeholder="Ex: Camiseta Premium" /></div><div class="form-group"><label class="form-label">Tipo</label><select class="form-control" id="prodTipo"><option value="fisico">Físico — pede endereço</option><option value="digital">Digital — sem endereço</option></select></div></div>
+          <div class="form-row"><div class="form-group"><label class="form-label">Nome do produto</label><input class="form-control" id="prodNome" placeholder="Ex: Camiseta Premium" /></div><div class="form-group"><label class="form-label">Preço</label><input class="form-control" id="prodPreco" type="number" step="0.01" placeholder="0,00" /></div><div class="form-group"><label class="form-label">Tipo</label><select class="form-control" id="prodTipo"><option value="fisico">Físico — pede endereço</option><option value="digital">Digital — sem endereço</option></select></div></div>
           <div class="form-group"><label class="form-label">Descrição (opcional)</label><textarea class="form-control" id="prodDescricao" rows="3" placeholder="Descrição…"></textarea></div>
           <div class="form-group"><label class="form-label">Imagem</label><input class="form-control" id="prodImagem" type="file" accept="image/*" /><div class="form-hint">PNG, JPEG ou WebP. Máximo 5MB.</div></div>
           <div class="form-row cols-3">
@@ -280,7 +281,7 @@
 
       <!-- ============================ PIXELS ============================ -->
       <div class="view" id="view-pixels"><div class="page">
-        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Pixels</h1><p style="font-size:12px;color:var(--text-secondary);">Rastreamento e conversões</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;"><span data-store>Loja</span> — Pixels</h1><p style="font-size:12px;color:var(--text-secondary);">Rastreamento e conversões</p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
         <div class="pixel-section">
           <div class="pixel-section-title">Pixel &amp; Conversões (Facebook)</div>
           <div class="form-group"><label class="form-label">Pixel Facebook — ID</label><input class="form-control" id="fbPixel" placeholder="123456789" /><div class="form-hint">ID do seu Pixel Facebook</div></div>
@@ -303,7 +304,7 @@
 
       <!-- ============================ DOMÍNIOS ============================ -->
       <div class="view" id="view-dominios"><div class="page">
-        <div class="sub-header"><div><div style="font-size:10px;color:var(--text-secondary);letter-spacing:0.1em;text-transform:uppercase;">🌐 Domínios customizados</div><h1 style="font-size:18px;font-weight:700;">DOMÍNIOS</h1><p style="font-size:12px;color:var(--text-secondary);">PRÜNE · 1 domínio</p></div><button class="btn btn-gold">+ Adicionar Domínio</button></div>
+        <div class="sub-header"><div><div style="font-size:10px;color:var(--text-secondary);letter-spacing:0.1em;text-transform:uppercase;">🌐 Domínios customizados</div><h1 style="font-size:18px;font-weight:700;">DOMÍNIOS</h1><p style="font-size:12px;color:var(--text-secondary);"><span data-store>Loja</span> · <span id="domCount">0</span> domínio(s)</p></div><button class="btn btn-gold" id="domAdd">+ Adicionar Domínio</button></div>
         <div class="info-box">
           <div style="display:flex;gap:12px;align-items:flex-start;">
             <span>ℹ️</span>
@@ -315,20 +316,12 @@
             </div>
           </div>
         </div>
-        <div class="domain-row">
-          <div style="flex:1;">
-            <div style="display:flex;align-items:center;gap:10px;"><span class="domain-name">pago.outletprune-oficial.com</span><span class="badge success dot">Ativo</span><span style="font-size:11px;color:var(--text-secondary);">expira em 88 dias</span></div>
-            <div class="domain-meta"><span>🔗 CNAME → pay.nonexcheckout.com</span><span>Emitido em 08/06/2026</span><span>Última checagem: 08/06 23:52</span><span>Criado em 08/06/2026 23:30</span></div>
-          </div>
-          <button class="btn btn-outline" style="font-size:10.5px;">↗ Abrir</button>
-          <button class="btn btn-outline" style="font-size:10.5px;">↻ Renovar</button>
-          <button class="icon-btn danger">🗑</button>
-        </div>
+        <div id="dominiosList"></div>
       </div></div>
 
       <!-- ============================ CONFIGURAÇÕES ============================ -->
       <div class="view" id="view-configuracoes"><div class="page">
-        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;">PRÜNE — Configurações</h1><p style="font-size:12px;color:var(--text-secondary);">ID do checkout: <code class="td-mono">loja11</code></p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
+        <div class="sub-header"><div><h1 style="font-size:18px;font-weight:700;"><span data-store>Loja</span> — Configurações</h1><p style="font-size:12px;color:var(--text-secondary);">ID do checkout: <code class="td-mono">loja11</code></p></div><button class="back-btn" data-view="dashboard">← Voltar</button></div>
 
         <div class="card" style="margin-bottom:16px;">
           <div class="section-title">🛍 Integração Shopify</div>
@@ -368,6 +361,19 @@
         </div>
       </div></div>
 
+    </div>
+  </div>
+
+  <!-- Modal reutilizável (substitui prompt/confirm) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <h3 id="modalTitle">Título</h3>
+      <div class="modal-sub" id="modalSub"></div>
+      <div id="modalBody"></div>
+      <div class="modal-actions">
+        <button class="btn btn-outline" id="modalCancel">Cancelar</button>
+        <button class="btn btn-gold" id="modalOk">Confirmar</button>
+      </div>
     </div>
   </div>
 

@@ -241,3 +241,66 @@ API). São injetados no checkout para rastreamento e conversões server-side.
 No `admin/js/api.js`: `USE_BACKEND = true` e `API_BASE = 'https://api.seudominio.com'`.
 A partir daí o painel lê/grava tudo (lojas, produtos, pedidos, carrinhos e
 credenciais) via PHP. Sem isso, ele funciona localmente no navegador.
+
+---
+
+## 🔐 Login (conta admin) e novos endpoints
+
+| Método | Endpoint                     | Função                                            |
+|--------|------------------------------|---------------------------------------------------|
+| POST   | `api/auth/register.php`      | Cria a conta admin (só se nenhuma existir)         |
+| POST   | `api/auth/login.php`         | Autentica (bcrypt) e devolve token                 |
+| GET/POST | `api/fretes_list.php` · `frete_save.php` · `frete_delete.php` | CRUD de métodos de entrega |
+| GET/POST | `api/dominios_list.php` · `dominio_save.php` · `dominio_delete.php` | CRUD de domínios |
+| GET/POST | `api/ads_list.php` · `ad_save.php` · `ad_delete.php` | CRUD de custos de anúncio |
+| POST   | `api/create_payment.php`     | Cobrança real via Stripe **ou** Whop (chaves da loja) |
+| POST   | `api/shopify_push.php`       | Cria produto no catálogo da Shopify (write_products)  |
+
+### Login
+No **modo local** (sem backend) a tela `login.html` cria sua conta admin no
+primeiro acesso (e-mail + senha, hash no navegador) e libera o painel. É um
+**porteiro local**, não segurança de servidor. Para login real, ligue o backend
+e troque a tela para chamar `auth/register.php` / `auth/login.php` (senha em
+bcrypt via `password_hash`). O `auth.js` já bloqueia o acesso sem token e o
+botão **Sair** encerra a sessão.
+
+### Pagamentos (Stripe / Whop) — como funciona de verdade
+O painel **guarda** suas chaves por loja. Quem **processa** o pagamento é o
+checkout chamando `create_payment.php`, que:
+- **Stripe:** cria um *PaymentIntent* com sua `sk_live_…` e devolve o
+  `client_secret` para o checkout finalizar com o Payment Element.
+- **Whop:** cria uma sessão de checkout com sua API key e devolve a URL de compra.
+Ou seja: **sim, dá para plugar sua API da Stripe e da Whop direto no painel.**
+O código está pronto; ajuste o `plan_id`/preço da Whop conforme sua conta e rode
+no seu host (não há como testar cobrança real aqui).
+
+### Produtos → Shopify (duas coisas diferentes)
+- A tela **Produtos** gera **links de checkout avulsos** (seu checkout próprio) —
+  isso funciona local e via backend.
+- Se quiser **cadastrar o produto no catálogo da Shopify**, use `shopify_push.php`
+  (app personalizado com escopo **write_products**). É um passo separado.
+
+### Pixels de conversão — funcionam?
+Os helpers do checkout (`src/tracking/facebook.js` e `tiktok.js`) **injetam o
+pixel e disparam eventos** de verdade (PageView, e os eventos padrão de compra).
+Eles agem quando o checkout é servido com o ID de pixel salvo no painel. O
+complemento server-side (Conversions API / Events API) é feito por um `capi.php`
+no backend. Resumo: **o disparo no navegador já é real**; o CAPI exige o backend no ar.
+
+---
+
+## 🔗 Integração com o Checkout (Pedidos e Carrinhos reais)
+
+Estes endpoints são chamados **pelo checkout** e fazem as telas Pedidos e
+Carrinhos deixarem de ser exemplo e passarem a contar de verdade:
+
+| Método | Endpoint                    | Função                                              |
+|--------|-----------------------------|-----------------------------------------------------|
+| POST   | `api/checkout_order.php`    | Checkout registra o pedido (Pendente) → tela Pedidos |
+| POST   | `api/checkout_track.php`    | Checkout rastreia o carrinho (email→endereço→pagamento) → Carrinhos + funil |
+
+Fluxo real: **checkout** (Node) → `checkout_order.php` grava o pedido e
+`create_payment.php` cobra (Whop/Stripe) → o painel lê de `pedidos_list.php` /
+`carrinhos_list.php` com `USE_BACKEND = true`. Carrinho abandonado = sessão que
+rastreou progresso mas não virou pedido pago. O "Valor perdido" foi removido; o
+funil é calculado a partir dos pedidos + carrinhos reais.

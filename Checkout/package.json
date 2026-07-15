@@ -1,0 +1,11 @@
+{
+  "name": "checkout-dinamico-painel",
+  "version": "1.0.0",
+  "description": "Checkout nativo e dinâmico integrado ao painel",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

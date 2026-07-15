@@ -156,6 +156,23 @@ function init_schema(PDO $pdo): void {
         ip TEXT,
         created_at TEXT DEFAULT CURRENT_TIMESTAMP
     )");
+
+    $pdo->exec("CREATE TABLE IF NOT EXISTS fretes (
+        id TEXT PRIMARY KEY, loja_id TEXT, nome TEXT,
+        preco REAL DEFAULT 0, dias_min INTEGER, dias_max INTEGER, ativo INTEGER DEFAULT 1
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS dominios (
+        id TEXT PRIMARY KEY, loja_id TEXT, dominio TEXT,
+        status TEXT DEFAULT 'Ativo', expira TEXT, criado TEXT DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS ads (
+        id TEXT PRIMARY KEY, loja_id TEXT, plataforma TEXT, data TEXT,
+        valor REAL DEFAULT 0, created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )");
+    $pdo->exec("CREATE TABLE IF NOT EXISTS users (
+        id TEXT PRIMARY KEY, email TEXT UNIQUE, pass_hash TEXT,
+        role TEXT DEFAULT 'admin', created_at TEXT DEFAULT CURRENT_TIMESTAMP
+    )");
 }
 
 /** Popula dados de exemplo (das telas) só se as tabelas estiverem vazias. */
@@ -163,12 +180,12 @@ function seed_if_empty(PDO $pdo): void {
     $n = (int) $pdo->query("SELECT COUNT(*) c FROM lojas")->fetch()['c'];
     if ($n > 0) return;
 
-    // Lojas (PRÜNE) — espelha a tela "Minhas Lojas"
+    // Lojas — espelha a tela "Minhas Lojas"
     $ins = $pdo->prepare("INSERT INTO lojas
         (id, nome, checkout_id, moeda, idioma, cor, shopify_connected, whop_connected, shopify_domain, whop_company_id, ativo)
         VALUES (?,?,?,?,?,?,?,?,?,?,1)");
-    $ins->execute(['loja_11', 'PRÜNE', 'loja11', 'ARS', 'es', '#000000', 1, 1, 'ydsepz-uu.myshopify.com', 'biz_rEIQP9MIsW3Hbq']);
-    $ins->execute(['loja_1', 'PRÜNE', 'loja1', 'BRL', 'pt', '#000000', 0, 0, null, null]);
+    $ins->execute(['loja_11', 'Minha Loja', 'loja11', 'ARS', 'es', '#000000', 1, 1, 'ydsepz-uu.myshopify.com', 'biz_rEIQP9MIsW3Hbq']);
+    $ins->execute(['loja_1', 'Loja 2', 'loja1', 'BRL', 'pt', '#000000', 0, 0, null, null]);
 
     // Alguns pedidos pendentes (tela "Pedidos")
     $p = $pdo->prepare("INSERT INTO pedidos
@@ -186,4 +203,13 @@ function seed_if_empty(PDO $pdo): void {
     $c->execute([gen_id('cart'), 'loja_11', 'aec_8975@yahoo.com.ar', 'email', 51283.77, '190.189.240.124', '2026-06-09 20:00']);
     $c->execute([gen_id('cart'), 'loja_11', 'veronica.galladini@gmail.com', 'email', 581847.07, '181.228.62.15', '2026-06-09 15:00']);
     $c->execute([gen_id('cart'), 'loja_11', 'silpa@example.com', 'email', 75345.60, '190.18.253.79', '2026-06-09 14:00']);
+
+    // Métodos de entrega (tela "Fretes")
+    $f = $pdo->prepare("INSERT INTO fretes (id, loja_id, nome, preco, ativo) VALUES (?,?,?,?,1)");
+    $f->execute(['f1', 'loja_11', 'Envío gratis', 0]);
+    $f->execute(['f2', 'loja_11', 'Envío prioritario', 9997]);
+
+    // Domínio customizado (tela "Domínios")
+    $d = $pdo->prepare("INSERT INTO dominios (id, loja_id, dominio, status, expira) VALUES (?,?,?,?,?)");
+    $d->execute(['dom1', 'loja_11', 'pago.outletprune-oficial.com', 'Ativo', '88']);
 }
